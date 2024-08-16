@@ -1,6 +1,7 @@
 package org.dgac.cl.model.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.Collate;
 
@@ -31,4 +32,33 @@ public class ObjetoRetenido implements Serializable {
 	
 	@Column(name = "objr_nombre")
 	private String nombre;
+
+	@Column(name = "objr_marca")
+	private String marcaString;
+
+	@Column(name="objr_modelo")
+	private String modelo;
+
+	@Column(name="objr_serie")
+	private String serie;
+
+	@Column(name="objr_cantidad")
+	private Integer cantidad;
+
+	@Column(name="objr_observacion")
+	private String observacion;
+
+	@Column(name="objr_fecha_ceracion")
+	private LocalDateTime fechaCreacion;
+
+	@Column(name="objr_encargado")
+	private Integer encargado;
+
+	@Column(name="objr_habilitado")
+	private Boolean habilitado;
+
+	@Column(name="objr_formulario") 
+	private Integer formulario;
+
+
 }
