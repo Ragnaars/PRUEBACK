@@ -1,52 +1,43 @@
 package org.dgac.cl.model.service;
 
-
 import java.util.List;
 
-import org.dgac.cl.model.dao.UsuarioDAO;
-import org.dgac.cl.model.entity.Usuario;
+import org.dgac.cl.model.dao.UnidadAeroportuariaDao;
+import org.dgac.cl.model.entity.UnidadAeroportuaria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class UnidadAeroportuariaServiceImpl implements UnidadAeroportuariaService{
 
     @Autowired
-    private UsuarioDAO dao;
+    private UnidadAeroportuariaDao dao;
 
     @Override
-    public List<Usuario> findAll(){
+    public List<UnidadAeroportuaria> findAll(){
         return dao.findAll();
     }
     
     @Override
-    @Transactional(readOnly = true)
-    public Usuario findById(Integer id){
+    public UnidadAeroportuaria findById(Integer id){
         return dao.findById(id).orElse(null);
     }
 
     @Override
-    public Usuario save(Usuario usuario){
-        return dao.save(usuario);
+    public UnidadAeroportuaria save(UnidadAeroportuaria unidadAeroportuaria){
+        return dao.save(unidadAeroportuaria);
     }
 
     @Override
-    @Transactional(readOnly = false)
     public void deleteById(Integer id){
         dao.deleteById(id);
     }
 
     @Override
-    public Page<Usuario> findAll(Pageable pageable){
+    public Page<UnidadAeroportuaria> findAll(Pageable pageable){
         return dao.findAll(pageable);
     }
-
-
-
 
 }
