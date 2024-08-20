@@ -25,25 +25,24 @@ public class ObjetoRetenidoController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(Long id) {
+	public ResponseEntity<?> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
-	@PostMapping
+	@PostMapping("/")
 	public ResponseEntity<?> save(@RequestBody ObjetoRetenido objetoRetenido){
 		ObjetoRetenido nuevoObjeto = service.save(objetoRetenido);
 		return ResponseEntity.ok(nuevoObjeto);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable Long id, @RequestBody ObjetoRetenido objetoRetenido){
+	public ResponseEntity<?> delete(@PathVariable Long id){
 		ObjetoRetenido objetoExistente = service.findById(id);
-		if(objetoExistente != null){
-			objetoRetenido.setId(id);
-			ObjetoRetenido objetoActualizado = service.save(objetoRetenido);
-			return ResponseEntity.ok(objetoActualizado);
-		}else{
-			return ResponseEntity.notFound().build();
+		if(objetoExistente != null) {
+			service.delete(objetoExistente);
+			return ResponseEntity.ok("Objeto eliminado correctamente");
+		}else {
+			return ResponseEntity.ok("Objeto no encontrado");
 		}
 	}
 

@@ -34,7 +34,7 @@ public class ObjetoRetenido implements Serializable {
 	private String nombre;
 
 	@Column(name = "objr_marca")
-	private String marcaString;
+	private String marca;
 
 	@Column(name="objr_modelo")
 	private String modelo;
@@ -48,7 +48,7 @@ public class ObjetoRetenido implements Serializable {
 	@Column(name="objr_observacion")
 	private String observacion;
 
-	@Column(name="objr_fecha_ceracion")
+	@Column(name="objr_fecha_creacion", insertable = false, updatable = false)
 	private LocalDateTime fechaCreacion;
 
 	@Column(name="objr_encargado")
