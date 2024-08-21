@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -24,8 +26,9 @@ public class PuenteEmbarque {
     @Column(name="ptem_nombre")
     private String nombre;
 
-    @Column(name="ptem_unidad_aeroportuaria")
-    private Integer unidadAeroportuaria;
+    @ManyToOne
+    @JoinColumn(name="ptem_unidad_aeroportuaria")
+    private UnidadAeroportuaria unidadAeroportuaria;
 
     @Column(name="ptem_fecha_creacion", insertable=false, updatable=false)
     private LocalDateTime fechaCreacion;
