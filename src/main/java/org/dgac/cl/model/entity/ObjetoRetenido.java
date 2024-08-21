@@ -3,9 +3,6 @@ package org.dgac.cl.model.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.Collate;
-
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -59,6 +56,12 @@ public class ObjetoRetenido implements Serializable {
 
 	@Column(name="objr_formulario") 
 	private Integer formulario;
+
+	@Column(name="objr_datos_adicionales")
+	private String datosAdicionales;
+
+	@Column(name="objr_tipo")
+	private String tipo;
 
 
 }
