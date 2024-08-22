@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -22,11 +24,9 @@ public class Formulario {
 
 
     //Preguntar a andres el pq una sola hora de registro
-    @Column(name="frml_fecha_hora_registro")
+    @Column(name="frml_fecha_hora_registro" , insertable = false, updatable = false)
     private LocalDateTime fechaHoraRegistro;
 
-
-    //Preguntar a andres por que el asiento es string, siendo que podría traer letras
     @Column(name="frml_asiento_pax")
     private Integer asientoPax;
 
@@ -42,10 +42,10 @@ public class Formulario {
     @Column(name="frml_vuelo")
     private String vuelo;
 
-    //Preguntar a andres el porque el tipo de dato es entero siendo que podria traer letras
     //foranea
-    @Column(name="frml_puente_embarque")
-    private Integer puenteEmbarque;
+    @ManyToOne
+    @JoinColumn(name="frml_puente_embarque")
+    private PuenteEmbarque puenteEmbarque;
 
     @Column(name="frml_particular")
     private String particular;
@@ -53,19 +53,21 @@ public class Formulario {
     @Column(name="frml_pax_nombre")
     private String paxNombre;
 
-    @Column(name="frml_tiket")
+    @Column(name="frml_ticket")
     private String tiket;
 
     //foranea
-    @Column(name="frml_user_avsec")
-    private Integer userAvsec;
+    @ManyToOne
+    @JoinColumn(name="frml_user_avsec")
+    private Usuario userAvsec;
 
     @Column(name="frml_pax_numero_telefono")
     private String paxNumeroTelefono;
 
     //foranea
-    @Column(name="frml_estado")
-    private Integer estado; 
+    @ManyToOne
+    @JoinColumn(name="frml_estado")
+    private EstadoFormulario estado; 
 
     @Column(name="frml_pax_rut")
     private String paxRut;
@@ -85,7 +87,6 @@ public class Formulario {
     @Column(name="frml_escala_origen")
     private String escalaOrigen;
     
-    //Preguntar a andres por el (4) que se ve en el nombre de la tabla en dbeaver
     @Column(name="frml_escala_destino")
     private String escalaDestino;
 
@@ -93,22 +94,25 @@ public class Formulario {
     private LocalDateTime escalaFecha;
 
     //foranea
-    @Column(name="frml_user_avsec_ingresa")
-    private Integer userAvsecIngresa;
+    @ManyToOne
+    @JoinColumn(name="frml_user_avsec_ingresa")
+    private Usuario userAvsecIngresa;
 
     @Column(name="frml_user_avsec_ingresa_firma")
     private String userAvsecIngresaFirma;
 
     //foranea
-    @Column(name="frml_user_avsec_retira")
-    private Integer userAvsecRetira;
+    @ManyToOne
+    @JoinColumn(name="frml_user_avsec_retira")
+    private Usuario userAvsecRetira;
 
     @Column(name="frml_user_avsec_retira_firma")
     private String userAvsecRetiraFirma;
 
     //foranea
-    @Column(name="frml_unidad_aeroportuaria")
-    private Integer unidadAeroportuaria;
+    @ManyToOne
+    @JoinColumn(name="frml_unidad_aeroportuaria")
+    private UnidadAeroportuaria unidadAeroportuaria;
 
 
 
