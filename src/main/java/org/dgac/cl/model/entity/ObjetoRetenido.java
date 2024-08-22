@@ -50,14 +50,16 @@ public class ObjetoRetenido implements Serializable {
 	@Column(name="objr_fecha_creacion", insertable = false, updatable = false)
 	private LocalDateTime fechaCreacion;
 
-	@Column(name="objr_encargado")
-	private Integer encargado;
+	@ManyToOne
+	@JoinColumn(name="objr_encargado")
+	private Usuario encargado;
 
 	@Column(name="objr_habilitado")
 	private Boolean habilitado;
 
-	@Column(name="objr_formulario") 
-	private Integer formulario;
+	@ManyToOne
+	@JoinColumn(name="objr_formulario") 
+	private Formulario formulario;
 
 	@Column(name="objr_datos_adicionales")
 	private String datosAdicionales;
