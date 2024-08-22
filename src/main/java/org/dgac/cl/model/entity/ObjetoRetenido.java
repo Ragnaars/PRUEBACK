@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -60,8 +62,9 @@ public class ObjetoRetenido implements Serializable {
 	@Column(name="objr_datos_adicionales")
 	private String datosAdicionales;
 
-	@Column(name="objr_tipo")
-	private String tipo;
+	@ManyToOne
+	@JoinColumn(name = "objr_tipo")
+	private ObjetoRetenidoTipo tipo;
 
 
 }
