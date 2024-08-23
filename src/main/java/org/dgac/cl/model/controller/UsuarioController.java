@@ -1,10 +1,10 @@
 package org.dgac.cl.model.controller;
 
 import org.dgac.cl.model.entity.Usuario;
-import org.dgac.cl.model.service.UsuarioService;
+import org.dgac.cl.negocio.UsuarioNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,42 +23,36 @@ import lombok.extern.log4j.Log4j2;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioService service;
+    private UsuarioNegocio negocio;
 
     @GetMapping("/")
     public ResponseEntity<?> findAll(){
-        return ResponseEntity.ok(service.findAll());
+        return ResponseEntity.ok(negocio.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id){
-        return ResponseEntity.ok(service.findById(id));
+        return ResponseEntity.ok(negocio.findById(id));
     }
 
     @PostMapping("/")
     public ResponseEntity<?> save(@RequestBody Usuario usuario){
-        return ResponseEntity.ok(service.save(usuario));
+        return ResponseEntity.ok(negocio.save(usuario));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Integer id){
-        Usuario usuarioExistente = service.findById(id);
-
-        if(usuarioExistente != null){
-            try{
-                service.deleteById(id); 
-            }catch(DataAccessException e){
-                log.error("error", e.getMostSpecificCause());      
-            }
-            return ResponseEntity.ok("Usuario eliminado correctamente");
-        }else{
-            return ResponseEntity.ok("Usuario no encontrado");
+        try {
+            String result = negocio.deleteById(id);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @GetMapping("/page")
     public ResponseEntity<?> findaAll(@RequestParam(defaultValue="0") Integer page, @RequestParam(defaultValue="5") Integer size ){
-        return ResponseEntity.ok(service.findAll(PageRequest.of(page,size)));
+        return ResponseEntity.ok(negocio.findAll(PageRequest.of(page,size)));
     }
 
 }

@@ -26,7 +26,6 @@ public class ObjetoRetenidoNegocio {
 
     public String deleteById(Long id) throws Exception{
         ObjetoRetenido objRetExistente = service.findById(id);
-
         if(objRetExistente == null){
             throw new Exception("ObjetoRetenido no encontrado");
         }else{
