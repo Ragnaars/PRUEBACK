@@ -31,9 +31,8 @@ public class ObjetoRetenidoServiceImpl implements ObjetoRetenidoService {
 	}
 
 	@Override
-	public void delete(ObjetoRetenido objetoRetenido) {
-
-		dao.delete(objetoRetenido);
+	public void deleteById(Long id) {
+		dao.deleteById(id);
 	}
 
 }
