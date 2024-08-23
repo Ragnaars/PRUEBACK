@@ -1,7 +1,6 @@
 package org.dgac.cl.negocio;
 
 import java.util.List;
-
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.service.FormularioService;
 import org.springframework.beans.factory.annotation.Autowired;

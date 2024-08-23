@@ -1,18 +1,21 @@
 package org.dgac.cl.model.entity;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.util.Set;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Data
+@Entity
 @Table(name="tbl_usuario")
 
 public class Usuario {
@@ -46,10 +49,8 @@ public class Usuario {
     @Column(name="usro_habilitado")
     private Boolean habilitado;
 
-
-
-
-
-
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnoreProperties("usuario")
+    private Set<UsuarioUnidadAeroportuariaPerfil> unidadesPerfiles;
 
 }
