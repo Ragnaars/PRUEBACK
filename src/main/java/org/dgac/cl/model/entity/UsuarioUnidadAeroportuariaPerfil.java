@@ -17,9 +17,11 @@ public class UsuarioUnidadAeroportuariaPerfil {
     @Id
     @Column(name = "usro_id")
     private Integer usuario;
+
     @Id
     @Column(name = "unar_id")
     private Integer unidadAeroportuaria;
+    
     @Id
     @Column(name = "prfl_id")
     private Integer perfil;
