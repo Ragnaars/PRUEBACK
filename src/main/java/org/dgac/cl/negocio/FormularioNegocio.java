@@ -24,12 +24,14 @@ public class FormularioNegocio {
         return service.save(formulario);
     }
 
-    public void deleteById(Long id) throws Exception{
+    public String deleteById(Long id) throws Exception{
         Formulario formularioExistente = service.findById(id);
 
-        if(formularioExistente != null){
-            service.deleteById(id);
+        if(formularioExistente == null){
             throw new Exception("Formulario no encontrado");
+        }else{
+            service.deleteById(id);
+            return "Formulario con ID " + id + " eliminado";
         }
     }
 
