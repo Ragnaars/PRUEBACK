@@ -8,5 +8,5 @@ public interface ObjetoRetenidoService {
 	public List<ObjetoRetenido> findAll();
 	public ObjetoRetenido findById(Long id);
 	public ObjetoRetenido save(ObjetoRetenido objetoRetenido);
-	public void delete(ObjetoRetenido objetoRetenido);
+	public void deleteById(Long id);
 }

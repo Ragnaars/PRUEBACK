@@ -37,12 +37,18 @@ public class FormularioController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id) throws Exception{
+<<<<<<< HEAD
+        negocio.deleteById(id);
+        return ResponseEntity.ok().build();
+        
+=======
         try {
             negocio.deleteById(id);
             return ResponseEntity.ok().build();    
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+>>>>>>> develop
     }
 }
 
