@@ -1,5 +1,6 @@
 package org.dgac.cl.integracion.adlogin;
 
+import org.dgac.cl.model.entity.Parametro;
 import org.dgac.cl.model.service.ParametroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -16,6 +17,7 @@ import com.google.gson.JsonObject;
 
 
 
+@SuppressWarnings("unused")
 @Service
 public class AdLoginServiceImpl implements AdLoginService {
 
@@ -30,7 +32,10 @@ public class AdLoginServiceImpl implements AdLoginService {
     @Override
     public Boolean login(String user, String pass) throws Exception{
         ResponseEntity<String> adr = null;
-        String uri = parametroService.findById("WS_LOGIN_WSDL") + "/login";
+        Parametro parametro = parametroService.findById("WS_LOGIN_WSDL");
+        String uri = parametro.getValor() + "/login";
+
+        
         MultiValueMap<String,String> parameters = new LinkedMultiValueMap<>();
         parameters.add("usuario", user);
         parameters.add("password", pass);
@@ -54,6 +59,7 @@ public class AdLoginServiceImpl implements AdLoginService {
     }
 
 
+    //Funcion optimizada segun GPT
     //     public Boolean login(String user, String pass) throws Exception {
     //     String uri = parametroService.findById("WS_LOGIN_WSDL") + "/login";
         
@@ -74,4 +80,6 @@ public class AdLoginServiceImpl implements AdLoginService {
     // }
 
     
+
+
 }

@@ -8,6 +8,6 @@ public interface AdLoginService {
      * 
      * 
      */
-    public boolean Login(String user, String pass) throws Exception;
+    public Boolean login(String user, String pass) throws Exception;
 
 }
