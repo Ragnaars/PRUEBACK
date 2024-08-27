@@ -19,9 +19,6 @@ import lombok.Data;
 @Table(name = "tbl_objeto_retenido")
 public class ObjetoRetenido implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id

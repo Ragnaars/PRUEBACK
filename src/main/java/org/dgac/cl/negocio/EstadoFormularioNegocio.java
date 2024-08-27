@@ -22,7 +22,7 @@ public class EstadoFormularioNegocio {
     }
 
     public EstadoFormulario save(EstadoFormulario estadoFormulario){
-        return save(estadoFormulario);
+        return service.save(estadoFormulario);
     }
 
     public String deleteById(Integer id) throws Exception{

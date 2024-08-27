@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import org.dgac.cl.enums.SearchOperation;
+import org.dgac.cl.model.entity.CompaniaAerea;
+import org.dgac.cl.model.entity.EstadoFormulario;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.entity.Usuario;
 
@@ -24,8 +26,6 @@ public class FormularioFilter implements Serializable, Filtro {
     private LocalDateTime fechaHoraRegistro;
 
     private Integer asientoPax;
-
-    private String companiaNombre;
 
     private String origen;
 
@@ -64,10 +64,16 @@ public class FormularioFilter implements Serializable, Filtro {
     private Integer escalaFecha;
 
     private Usuario userAvsecIngresa;
+
     private String userAvsecIngresaFirma;
+
     private Usuario userAvsecRetira;
+
     private String userAvsecRetiraFirma;
+
     private Integer unidadAeroportuaria;
+
+    private Integer companiaAerea;
 
     @Override    
     public GenericSpecification<Formulario> generarFiltro(){
@@ -79,8 +85,8 @@ public class FormularioFilter implements Serializable, Filtro {
             ge.add(new SearchCriteria("asientoPax", asientoPax, SearchOperation.MATCH));
         }
 
-        if(companiaNombre != null && !companiaNombre.isEmpty()){
-            ge.add(new SearchCriteria("companiaNombre", companiaNombre, SearchOperation.MATCH));
+        if(companiaAerea != null){
+            ge.add(new SearchCriteria("companiaAerea", CompaniaAerea.builder().id(companiaAerea).build(), SearchOperation.EQUAL));
         }
 
         if(origen != null && !origen.isEmpty()){
@@ -121,7 +127,7 @@ public class FormularioFilter implements Serializable, Filtro {
         }
 
         if(estado != null && estado != 0){
-            ge.add(new SearchCriteria("estado", estado, SearchOperation.MATCH));
+            ge.add(new SearchCriteria("estado", EstadoFormulario.builder().id(estado).build(), SearchOperation.EQUAL));
         }
 
         if(paxRut != null && !paxRut.isEmpty()){

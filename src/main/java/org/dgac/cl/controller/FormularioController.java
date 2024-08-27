@@ -28,12 +28,23 @@ public class FormularioController {
         return ResponseEntity.ok(negocio.findAll());
     }
 
-    @GetMapping("page")
+    @GetMapping("/page")
     public ResponseEntity<?> findAllPage(
         @RequestParam(defaultValue = "0") Integer page,
         @RequestParam(defaultValue = "5") Integer size,
-        @RequestParam(required = false) String paxNombre){
-        FormularioFilter filtro = FormularioFilter.builder().paxNombre(paxNombre).build();
+        @RequestParam(required = false) String paxNombre,
+        @RequestParam(required = false) Integer companiaAerea,
+        @RequestParam(required = false) Integer estado,
+        @RequestParam(required = false) String destino,
+        @RequestParam(required = false) String origen)
+        {
+        FormularioFilter filtro = FormularioFilter.builder()
+            .paxNombre(paxNombre)
+            .companiaAerea(companiaAerea)
+            .estado(estado)
+            .destino(destino)
+            .origen(origen)
+            .build();
         return ResponseEntity.ok().body(negocio.findAllPage(filtro, PageRequest.of(page, size)));
     }
 
