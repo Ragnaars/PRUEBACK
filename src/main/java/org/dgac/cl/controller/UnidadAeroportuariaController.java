@@ -1,7 +1,7 @@
-package org.dgac.cl.model.controller;
+package org.dgac.cl.controller;
 
-import org.dgac.cl.model.entity.EstadoFormulario;
-import org.dgac.cl.negocio.EstadoFormularioNegocio;
+import org.dgac.cl.model.entity.UnidadAeroportuaria;
+import org.dgac.cl.negocio.UnidadAeroportuariaNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,31 +14,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/estadoFormulario")
-public class EstadoFormularioController {
+@RequestMapping("/unidadAeroportuaria")
+public class UnidadAeroportuariaController {
 
-    @Autowired
-    private EstadoFormularioNegocio negocio;
-
+    @Autowired 
+    private UnidadAeroportuariaNegocio negocio;
+    
     @GetMapping("/")
-    public ResponseEntity<?> findAll(){
+    private ResponseEntity<?> findAll(){
         return ResponseEntity.ok(negocio.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Integer id){
+    @GetMapping("/{id}") 
+    private ResponseEntity<?> findById(@PathVariable Integer id){
         return ResponseEntity.ok(negocio.findById(id));
     }
+
     @PostMapping("/")
-    public ResponseEntity<?> save(@RequestBody EstadoFormulario estadoFormulario){
-        return ResponseEntity.ok(negocio.save(estadoFormulario));
+    private ResponseEntity<?> save(@RequestBody UnidadAeroportuaria unidadAeroportuaria){
+        return ResponseEntity.ok(negocio.save(unidadAeroportuaria));
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable Integer id){
-        try{
+    private ResponseEntity<?> deleteById(@PathVariable Integer id){
+        try {
             String result = negocio.deleteById(id);
             return ResponseEntity.ok(result);
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }

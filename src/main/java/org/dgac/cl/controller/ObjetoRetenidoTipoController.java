@@ -1,7 +1,7 @@
-package org.dgac.cl.model.controller;
+package org.dgac.cl.controller;
 
-import org.dgac.cl.model.entity.Perfil;
-import org.dgac.cl.negocio.PerfilNegocio;
+import org.dgac.cl.model.entity.ObjetoRetenidoTipo;
+import org.dgac.cl.negocio.ObjetoRetenidoTipoNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-@RequestMapping("/perfil")
-public class PerfilController {
+@RequestMapping("/objetoRetenidoTipo")
+public class ObjetoRetenidoTipoController {
 
     @Autowired
-    private PerfilNegocio negocio;
+    private ObjetoRetenidoTipoNegocio negocio;
 
     @GetMapping("/")
     public ResponseEntity<?> findAll(){
@@ -26,25 +27,26 @@ public class PerfilController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Integer id){
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
         return ResponseEntity.ok(negocio.findById(id));
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> save(@RequestBody Perfil perfil){
-        return ResponseEntity.ok(negocio.save(perfil));
+    public ResponseEntity<?> save(@RequestBody ObjetoRetenidoTipo objetoRetenidoTipo){
+        return ResponseEntity.ok(negocio.save(objetoRetenidoTipo));
     }
-
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Integer id){
-        try{
+        try {
             String result = negocio.deleteById(id);
             return ResponseEntity.ok(result);
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
-
+    
+    
 
 }

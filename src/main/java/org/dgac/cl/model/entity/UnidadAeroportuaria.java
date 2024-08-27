@@ -30,7 +30,7 @@ public class UnidadAeroportuaria {
     private LocalDateTime fechaCreacion;
 
     @Column(name="unar_creado_por", insertable=false, updatable=false)
-    private Integer creadoPor;
+    private String creadoPor;
 
     @Column(name="unar_habilitado")
     private Boolean habilitado;

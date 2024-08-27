@@ -1,7 +1,7 @@
-package org.dgac.cl.model.controller;
+package org.dgac.cl.controller;
 
-import org.dgac.cl.model.entity.UnidadAeroportuaria;
-import org.dgac.cl.negocio.UnidadAeroportuariaNegocio;
+import org.dgac.cl.model.entity.Formulario;
+import org.dgac.cl.negocio.FormularioNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,35 +14,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/unidadAeroportuaria")
-public class UnidadAeroportuariaController {
+@RequestMapping("/formulario")
+public class FormularioController {
 
-    @Autowired 
-    private UnidadAeroportuariaNegocio negocio;
-    
+    @Autowired
+    private FormularioNegocio negocio;
+
     @GetMapping("/")
-    private ResponseEntity<?> findAll(){
+    public ResponseEntity<?> findAll(){
         return ResponseEntity.ok(negocio.findAll());
     }
 
-    @GetMapping("/{id}") 
-    private ResponseEntity<?> findById(@PathVariable Integer id){
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(negocio.findById(id));
     }
 
     @PostMapping("/")
-    private ResponseEntity<?> save(@RequestBody UnidadAeroportuaria unidadAeroportuaria){
-        return ResponseEntity.ok(negocio.save(unidadAeroportuaria));
+    public ResponseEntity<?> save(@RequestBody Formulario formulario){
+        return ResponseEntity.ok(negocio.save(formulario));
     }
 
     @DeleteMapping("/{id}")
-    private ResponseEntity<?> deleteById(@PathVariable Integer id){
+    public ResponseEntity<?> deleteById(@PathVariable Long id) throws Exception{
         try {
             String result = negocio.deleteById(id);
-            return ResponseEntity.ok(result);
+            return ResponseEntity.ok(result);    
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
 }
+

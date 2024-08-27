@@ -54,7 +54,7 @@ public class Formulario {
     private String paxNombre;
 
     @Column(name="frml_ticket")
-    private String tiket;
+    private String ticket;
 
     //foranea
     @ManyToOne

@@ -1,4 +1,4 @@
-package org.dgac.cl.model.controller;
+package org.dgac.cl.controller;
 
 import org.dgac.cl.model.entity.ObjetoRetenido;
 import org.dgac.cl.negocio.ObjetoRetenidoNegocio;

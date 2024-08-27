@@ -1,7 +1,7 @@
-package org.dgac.cl.model.controller;
+package org.dgac.cl.controller;
 
-import org.dgac.cl.model.entity.Formulario;
-import org.dgac.cl.negocio.FormularioNegocio;
+import org.dgac.cl.model.entity.Perfil;
+import org.dgac.cl.negocio.PerfilNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/formulario")
-public class FormularioController {
+@RequestMapping("/perfil")
+public class PerfilController {
 
     @Autowired
-    private FormularioNegocio negocio;
+    private PerfilNegocio negocio;
 
     @GetMapping("/")
     public ResponseEntity<?> findAll(){
@@ -26,23 +26,25 @@ public class FormularioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id){
+    public ResponseEntity<?> findById(@PathVariable Integer id){
         return ResponseEntity.ok(negocio.findById(id));
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> save(@RequestBody Formulario formulario){
-        return ResponseEntity.ok(negocio.save(formulario));
+    public ResponseEntity<?> save(@RequestBody Perfil perfil){
+        return ResponseEntity.ok(negocio.save(perfil));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable Long id) throws Exception{
-        try {
+    public ResponseEntity<?> deleteById(@PathVariable Integer id){
+        try{
             String result = negocio.deleteById(id);
-            return ResponseEntity.ok(result);    
-        } catch (Exception e) {
+            return ResponseEntity.ok(result);
+        }catch(Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-}
 
+
+
+}

@@ -1,8 +1,9 @@
-package org.dgac.cl.model.controller;
+package org.dgac.cl.controller;
 
-import org.dgac.cl.model.entity.ObjetoRetenidoTipo;
-import org.dgac.cl.negocio.ObjetoRetenidoTipoNegocio;
+import org.dgac.cl.model.entity.Usuario;
+import org.dgac.cl.negocio.UsuarioNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,15 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.log4j.Log4j2;
 
 @RestController
-@RequestMapping("/objetoRetenidoTipo")
-public class ObjetoRetenidoTipoController {
+@Log4j2
+@RequestMapping("/usuario")
+public class UsuarioController {
 
     @Autowired
-    private ObjetoRetenidoTipoNegocio negocio;
+    private UsuarioNegocio negocio;
 
     @GetMapping("/")
     public ResponseEntity<?> findAll(){
@@ -27,15 +31,15 @@ public class ObjetoRetenidoTipoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Integer id) {
+    public ResponseEntity<?> findById(@PathVariable Integer id){
         return ResponseEntity.ok(negocio.findById(id));
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> save(@RequestBody ObjetoRetenidoTipo objetoRetenidoTipo){
-        return ResponseEntity.ok(negocio.save(objetoRetenidoTipo));
+    public ResponseEntity<?> save(@RequestBody Usuario usuario){
+        return ResponseEntity.ok(negocio.save(usuario));
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Integer id){
         try {
@@ -46,7 +50,9 @@ public class ObjetoRetenidoTipoController {
         }
     }
 
-    
-    
+    @GetMapping("/page")
+    public ResponseEntity<?> findaAll(@RequestParam(defaultValue="0") Integer page, @RequestParam(defaultValue="5") Integer size ){
+        return ResponseEntity.ok(negocio.findAll(PageRequest.of(page,size)));
+    }
 
 }
