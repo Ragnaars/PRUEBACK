@@ -30,9 +30,6 @@ public class Formulario {
     @Column(name="frml_asiento_pax")
     private Integer asientoPax;
 
-    @Column(name="frml_compania_nombre")
-    private String companiaNombre;
-
     @Column(name="frml_origen")
     private String origen;
 
@@ -114,6 +111,10 @@ public class Formulario {
     @JoinColumn(name="frml_unidad_aeroportuaria")
     private UnidadAeroportuaria unidadAeroportuaria;
 
+    //foranea
+    @ManyToOne
+    @JoinColumn(name="frml_compania_aerea")
+    private CompaniaAerea companiaAerea;
 
 
 
