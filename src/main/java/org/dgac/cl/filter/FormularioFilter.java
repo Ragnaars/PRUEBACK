@@ -7,10 +7,16 @@ import org.dgac.cl.enums.SearchOperation;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.entity.Usuario;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class FormularioFilter implements Serializable, Filtro {
 
     private static final long serialVersionUID = 1L;
@@ -58,13 +64,9 @@ public class FormularioFilter implements Serializable, Filtro {
     private Integer escalaFecha;
 
     private Usuario userAvsecIngresa;
-
     private String userAvsecIngresaFirma;
-
     private Usuario userAvsecRetira;
-
     private String userAvsecRetiraFirma;
-
     private Integer unidadAeroportuaria;
 
     @Override    

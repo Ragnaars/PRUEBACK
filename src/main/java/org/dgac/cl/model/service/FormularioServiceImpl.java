@@ -5,6 +5,9 @@ import java.util.List;
 import org.dgac.cl.model.dao.FormularioDAO;
 import org.dgac.cl.model.entity.Formulario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +19,11 @@ public class FormularioServiceImpl implements  FormularioService {
     @Override
     public List<Formulario> findAll(){
         return dao.findAll();
+    }
+
+    @Override
+    public Page<Formulario> findAllPage(Specification<Formulario> specification, Pageable pageable) {
+        return dao.findAll(specification, pageable);
     }
 
     @Override

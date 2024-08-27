@@ -1,9 +1,14 @@
 package org.dgac.cl.negocio;
 
 import java.util.List;
+
+import org.dgac.cl.filter.FormularioFilter;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.service.FormularioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,6 +18,10 @@ public class FormularioNegocio {
     
     public List<Formulario> findAll(){
         return service.findAll();
+    }
+
+    public Page<Formulario> findAllPage(FormularioFilter filtro, Pageable pageable) {
+        return service.findAllPage(filtro.generarFiltro(), pageable);
     }
 
     public Formulario findById(Long id){
