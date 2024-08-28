@@ -10,5 +10,6 @@ public interface CompaniaAereaService {
     public CompaniaAerea findById(Integer id);
     public CompaniaAerea save(CompaniaAerea companiaAerea);
     public void deleteById(Integer id);
+    public List<CompaniaAerea> findByNombre(String nombre);
 
 }

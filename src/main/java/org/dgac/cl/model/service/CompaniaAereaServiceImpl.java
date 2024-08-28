@@ -32,6 +32,11 @@ public class CompaniaAereaServiceImpl implements CompaniaAereaService{
     public void deleteById(Integer id){        
         dao.deleteById(id);
     }
+
+    @Override
+    public List<CompaniaAerea> findByNombre(String nombre){
+        return dao.findByNombre(nombre);
+    }
     
 
 }
