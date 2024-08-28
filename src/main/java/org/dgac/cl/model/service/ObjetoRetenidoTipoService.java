@@ -14,4 +14,6 @@ public interface ObjetoRetenidoTipoService {
 
     public void deleteById(Integer id);
 
+    public ObjetoRetenidoTipo findByNombre(String nombre);
+
 }

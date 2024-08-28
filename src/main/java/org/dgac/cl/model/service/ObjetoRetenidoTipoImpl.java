@@ -33,6 +33,11 @@ public class ObjetoRetenidoTipoImpl implements ObjetoRetenidoTipoService {
         dao.deleteById(id);
     }
 
+    @Override
+    public ObjetoRetenidoTipo findByNombre(String nombre){
+        return dao.findByNombre(nombre);
+    }
+
 
 
 

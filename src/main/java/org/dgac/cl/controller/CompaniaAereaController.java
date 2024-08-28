@@ -46,7 +46,7 @@ public class CompaniaAereaController {
         }
     }
 
-    @PostMapping("/findName/{nombre}")
+    @PostMapping("/findName")
     public ResponseEntity<?> findByNombre(@RequestParam String nombre) {
         
         try{

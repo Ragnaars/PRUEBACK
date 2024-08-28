@@ -37,6 +37,9 @@ public class CompaniaAereaServiceImpl implements CompaniaAereaService{
     public List<CompaniaAerea> findByNombre(String nombre){
         return dao.findByNombre(nombre);
     }
+
+    
+
     
 
 }
