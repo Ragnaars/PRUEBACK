@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/formulario")
+// @CrossOrigin(origins = "*")
 public class FormularioController {
 
     @Autowired
