@@ -58,6 +58,12 @@ public class FormularioController {
         return ResponseEntity.ok(negocio.save(formulario));
     }
 
+    @PostMapping("/deshabilitar")
+    public ResponseEntity<?> deshabilitar(@RequestParam Long id) throws Exception {
+        negocio.deshabilitarFormulario(id);
+        return ResponseEntity.ok(null);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id) throws Exception{
         try {
