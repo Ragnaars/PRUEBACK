@@ -7,7 +7,6 @@ import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.service.FormularioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -43,4 +42,31 @@ public class FormularioNegocio {
         }
     }
 
+    public void registroFase1(Formulario formulario) {
+
+        // registro formulario
+
+        // añadir lista de objetos
+
+        // generar notificaciones
+
+        // actualizar estado formulario
+    }   
+    
+    /**
+     * deshabilita un formulario
+     * @param id
+     * @throws Exception 
+     */
+    public void deshabilitarFormulario(Long id) throws Exception {
+        // buscar formulario
+        Formulario formulario = service.findById(id);
+        if(formulario == null) {
+            throw new Exception("formulario no encontrado");
+        }
+
+        // deshabilitar formulario
+        formulario.setHabilitado(false);
+        service.save(formulario);
+    }
 }
