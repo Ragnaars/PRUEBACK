@@ -6,6 +6,7 @@ import org.dgac.cl.filter.FormularioFilter;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.service.CompaniaVueloService;
 import org.dgac.cl.model.service.FormularioService;
+import org.dgac.cl.model.service.ObjetoRetenidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ public class FormularioNegocio {
 
     @Autowired FormularioService service;
     @Autowired CompaniaVueloService companiaVueloService;
+    @Autowired ObjetoRetenidoService objetosRetenidosService;
     
     public List<Formulario> findAll(){
         return service.findAll();
@@ -45,14 +47,19 @@ public class FormularioNegocio {
     }
 
     public void registroFase1(Formulario formulario) {
-
+    
         // registro companiaVuelo;
         companiaVueloService.save(formulario.getCompaniaVuelo());
 
         // registro formulario
-        service.save(formulario);
+        final Formulario formAux = service.save(formulario);
 
         // añadir lista de objetos
+        formulario.getObjetosRetenidos().forEach(o -> {
+            o.setFormulario(Formulario.builder().id(formAux.getId()).build());
+        });
+        
+        objetosRetenidosService.saveAll(formulario.getObjetosRetenidos());
 
         // generar notificaciones
 

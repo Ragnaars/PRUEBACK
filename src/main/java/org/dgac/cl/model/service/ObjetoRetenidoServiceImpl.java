@@ -19,6 +19,12 @@ public class ObjetoRetenidoServiceImpl implements ObjetoRetenidoService {
 	}
 
 	@Override
+	public List<ObjetoRetenido> saveAll(List<ObjetoRetenido> objetosRetenidos) {
+		
+		return dao.saveAll(objetosRetenidos);
+	}
+
+	@Override
 	public ObjetoRetenido findById(Long id) {
 
 		return dao.findById(id).orElse(null);

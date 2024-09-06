@@ -1,8 +1,10 @@
 package org.dgac.cl.model.entity;
-
 import java.time.LocalDateTime;
-
+import java.time.LocalDate;
+import java.util.List;
 import org.dgac.cl.model.dto.FormularioDTO;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -142,6 +145,13 @@ public class Formulario {
 
     @Column(name = "frml_fecha_creacion", insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
+
+    @Column(name = "frml_fecha_vuelo")
+    private LocalDate fechaVuelo;
+
+    @OneToMany(mappedBy = "formulario")
+    @JsonIgnoreProperties("formulario")
+    private List<ObjetoRetenido> objetosRetenidos;
 
     public Formulario(FormularioDTO formulario) {
         

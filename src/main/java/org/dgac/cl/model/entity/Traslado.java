@@ -17,14 +17,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table
+@Table(name = "tbl_traslado")
 public class Traslado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trsd_id")
     private Integer id;
 
-    @Column(name = "trsd_tica_cod")
+    @Column(name = "trsd_tica_cot")
     private String ticaCot;
 
     @Column(name = "trsd_tica_zz")
