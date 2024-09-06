@@ -7,6 +7,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,6 @@ public class CompaniaVuelo {
     private Integer numeroVuelo;
 
     @ManyToOne
-    @JoinColumn(name = "cpvl_compania_aerea")
+    @JoinColumn(name = "cpvl_compania_aerea", insertable = false, updatable = false)
     private CompaniaAerea companiaAereaData;
 }

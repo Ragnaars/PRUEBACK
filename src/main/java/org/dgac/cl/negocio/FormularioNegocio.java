@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dgac.cl.filter.FormularioFilter;
 import org.dgac.cl.model.entity.Formulario;
+import org.dgac.cl.model.service.CompaniaVueloService;
 import org.dgac.cl.model.service.FormularioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class FormularioNegocio {
 
     @Autowired FormularioService service;
+    @Autowired CompaniaVueloService companiaVueloService;
     
     public List<Formulario> findAll(){
         return service.findAll();
@@ -44,7 +46,11 @@ public class FormularioNegocio {
 
     public void registroFase1(Formulario formulario) {
 
+        // registro companiaVuelo;
+        companiaVueloService.save(formulario.getCompaniaVuelo());
+
         // registro formulario
+        service.save(formulario);
 
         // añadir lista de objetos
 

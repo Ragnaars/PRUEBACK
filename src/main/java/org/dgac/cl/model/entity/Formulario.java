@@ -2,6 +2,8 @@ package org.dgac.cl.model.entity;
 
 import java.time.LocalDateTime;
 
+import org.dgac.cl.model.dto.FormularioDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -141,4 +143,7 @@ public class Formulario {
     @Column(name = "frml_fecha_creacion", insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 
+    public Formulario(FormularioDTO formulario) {
+        
+    }
 }

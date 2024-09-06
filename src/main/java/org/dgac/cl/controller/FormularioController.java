@@ -74,5 +74,11 @@ public class FormularioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @PostMapping("/registroFormulario")
+    public ResponseEntity<?> registroFormulario(@RequestBody Formulario formulario) {
+        negocio.registroFase1(formulario);
+        return ResponseEntity.ok(null);
+    }
 }
 
