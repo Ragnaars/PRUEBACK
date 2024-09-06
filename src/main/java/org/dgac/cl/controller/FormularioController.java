@@ -76,9 +76,8 @@ public class FormularioController {
     }
 
     @PostMapping("/registroFormulario")
-    public ResponseEntity<?> registroFormulario(@RequestBody Formulario formulario) {
-        negocio.registroFase1(formulario);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<?> registroFormulario(@RequestBody Formulario formulario) throws Exception {
+        return ResponseEntity.ok(negocio.registroFase1(formulario));
     }
 }
 

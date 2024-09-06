@@ -128,11 +128,17 @@ public class Formulario {
     @Column(name = "frml_observacion")
     private String observacion;
 
-    @Column(name = "frml_tica_usuario_compania")
-    private String ticaUsuarioCompania;
+    @Column(name = "frml_usuario_compania_tica")
+    private String usuarioCompaniaTica;
 
-    @Column(name = "frml_firma_usuario_compania")
-    private String firmaUsuarioCompania;
+    @Column(name = "frml_usuario_compania_firma")
+    private String usuarioCompaniaFirma;
+
+    @Column(name = "frml_usuario_compania_nombre")
+    private String usuarioCompaniaNombre;
+
+    @Column(name = "frml_pax_firma")
+    private String paxFirma;
 
     @ManyToOne
     @JoinColumns({

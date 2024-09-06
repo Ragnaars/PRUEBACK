@@ -2,12 +2,15 @@ package org.dgac.cl.negocio;
 
 import java.util.List;
 
+import org.dgac.cl.constantes.ConstantesEstadoFormulario;
 import org.dgac.cl.filter.FormularioFilter;
+import org.dgac.cl.model.entity.EstadoFormulario;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.service.CompaniaVueloService;
 import org.dgac.cl.model.service.FormularioService;
 import org.dgac.cl.model.service.ObjetoRetenidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.source.ConfigurationPropertyName.Form;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -46,24 +49,31 @@ public class FormularioNegocio {
         }
     }
 
-    public void registroFase1(Formulario formulario) {
+    public Formulario registroFase1(Formulario formulario) throws Exception {
     
+        // validar formulario
+        if(formulario.getEstado() != null) {
+            throw new Exception("Estado no válido");
+        }
+
         // registro companiaVuelo;
         companiaVueloService.save(formulario.getCompaniaVuelo());
 
-        // registro formulario
+        // registro formulario y fijar estado pendiente
+        formulario.setEstado(EstadoFormulario.builder().id(ConstantesEstadoFormulario.PENDIENTE).build());
         final Formulario formAux = service.save(formulario);
 
         // añadir lista de objetos
         formulario.getObjetosRetenidos().forEach(o -> {
             o.setFormulario(Formulario.builder().id(formAux.getId()).build());
         });
-        
+
         objetosRetenidosService.saveAll(formulario.getObjetosRetenidos());
 
         // generar notificaciones
 
-        // actualizar estado formulario
+
+        return formulario;
     }   
     
     /**
