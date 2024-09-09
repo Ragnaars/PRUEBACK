@@ -10,10 +10,13 @@ import org.dgac.cl.model.service.CompaniaVueloService;
 import org.dgac.cl.model.service.FormularioService;
 import org.dgac.cl.model.service.ObjetoRetenidoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.source.ConfigurationPropertyName.Form;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Component
 public class FormularioNegocio {
@@ -38,14 +41,20 @@ public class FormularioNegocio {
         return service.save(formulario);
     }
 
-    public String deleteById(Long id) throws Exception{
-        Formulario formularioExistente = service.findById(id);
+    @DeleteMapping("/formulario/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+        try {
+            Formulario formularioExistente = service.findById(id);
+            
+            if (formularioExistente == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Formulario con ID " + id + " no encontrado");
+            }
 
-        if(formularioExistente == null){
-            throw new Exception("Formulario no encontrado");
-        }else{
             service.deleteById(id);
-            return "Formulario con ID " + id + " eliminado";
+            return ResponseEntity.ok("Formulario con ID " + id + " eliminado exitosamente");
+            
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el formulario: " + e.getMessage());
         }
     }
 

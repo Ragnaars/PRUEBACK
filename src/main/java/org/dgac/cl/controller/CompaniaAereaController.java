@@ -50,7 +50,7 @@ public class CompaniaAereaController {
     public ResponseEntity<?> findByNombre(@RequestParam String nombre) {
         
         try{
-            String result = negocio.findByNombre(nombre);
+            CompaniaAerea result = negocio.findByNombre(nombre);
             return ResponseEntity.ok(result);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

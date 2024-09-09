@@ -21,6 +21,7 @@ public class CompaniaAereaNegocio  {
         return service.findById(id);
     }
 
+
     public CompaniaAerea save(CompaniaAerea companiaAerea){
         return service.save(companiaAerea);
     }
@@ -32,11 +33,11 @@ public class CompaniaAereaNegocio  {
             throw new Exception("Compania no existe");
         }else{
             service.deleteById(id);
-            return "Compania con ID " +id+ " Ha sido eliminado correctamente";
+            return "Compania con ID " + id + " Ha sido eliminado correctamente";
         }
     }
 
-    public String findByNombre(String nombre){
+    public CompaniaAerea findByNombre(String nombre){
         List<CompaniaAerea> companiaExistente = service.findByNombre(nombre);
 
         if(companiaExistente.isEmpty()){
@@ -45,9 +46,9 @@ public class CompaniaAereaNegocio  {
             nuevaCompania.setHabilitado(true);
 
             service.save(nuevaCompania);
-            return "Nueva compañia creada : " + nuevaCompania.getNombre();
+            return  nuevaCompania;
         }else{
-            return "Compañia ya existente, no se necesita crear";
+            return companiaExistente.get(0);
         }
 
     }
