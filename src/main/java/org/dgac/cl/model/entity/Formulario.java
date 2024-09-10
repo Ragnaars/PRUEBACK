@@ -1,7 +1,8 @@
 package org.dgac.cl.model.entity;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+
 import org.dgac.cl.model.dto.FormularioDTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -158,6 +159,9 @@ public class Formulario {
     @OneToMany(mappedBy = "formulario")
     @JsonIgnoreProperties("formulario")
     private List<ObjetoRetenido> objetosRetenidos;
+
+    @Column(name="frml_requiere_traslado")
+    private Boolean requiereTraslado;
 
     public Formulario(FormularioDTO formulario) {
         
