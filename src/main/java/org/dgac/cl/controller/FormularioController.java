@@ -88,6 +88,7 @@ public class FormularioController {
     @GetMapping("/pendienteEscolta")
     public ResponseEntity<?> pendienteEscolta() {
         return ResponseEntity.ok(negocio.getFormularioPendienteEscoltaByCompaniaVuelo());
+    }
 
     @PostMapping("/registroFormularioFase2")
     public ResponseEntity<?> registroFormularioFase2(@RequestBody Formulario formulario) throws Exception {
