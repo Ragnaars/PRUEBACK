@@ -153,15 +153,15 @@ public class Formulario {
     @Column(name = "frml_fecha_creacion", insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 
-    @Column(name = "frml_fecha_vuelo")
-    private LocalDate fechaVuelo;
+    @Column(name = "frml_fecha_hora_vuelo")
+    private LocalDateTime fechaHoraVuelo;
 
     @OneToMany(mappedBy = "formulario")
     @JsonIgnoreProperties("formulario")
     private List<ObjetoRetenido> objetosRetenidos;
 
     @Column(name="frml_requiere_traslado")
-    private Boolean requiereTraslado;
+    private Boolean requiereEscolta;
 
     public Formulario(FormularioDTO formulario) {
         

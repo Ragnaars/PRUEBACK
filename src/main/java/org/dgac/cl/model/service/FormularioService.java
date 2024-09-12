@@ -1,6 +1,7 @@
 package org.dgac.cl.model.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.dgac.cl.model.entity.Formulario;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,8 @@ public interface FormularioService {
     public Formulario findById(Long id);
     public Formulario save(Formulario formulario);
     public void deleteById(Long id);
-    
+    public Set<Object[]> getFormularioPendienteNoEscoltaByCompaniaVuelo();
+    public Set<Object[]> getFormularioPendienteEscoltaByCompaniaVuelo();
 
 
 }

@@ -1,6 +1,7 @@
 package org.dgac.cl.negocio;
 
 import java.util.List;
+import java.util.Set;
 
 import org.dgac.cl.constantes.ConstantesEstadoFormulario;
 import org.dgac.cl.filter.FormularioFilter;
@@ -100,5 +101,13 @@ public class FormularioNegocio {
         // deshabilitar formulario
         formulario.setHabilitado(false);
         service.save(formulario);
+    }
+
+    public Set<Object[]> getFormularioPendienteNoEscoltaByCompaniaVuelo() {
+        return service.getFormularioPendienteNoEscoltaByCompaniaVuelo();
+    }
+
+    public Set<Object[]> getFormularioPendienteEscoltaByCompaniaVuelo() {
+        return service.getFormularioPendienteEscoltaByCompaniaVuelo();
     }
 }

@@ -1,6 +1,7 @@
 package org.dgac.cl.model.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.dgac.cl.model.dao.FormularioDAO;
 import org.dgac.cl.model.entity.Formulario;
@@ -27,8 +28,20 @@ public class FormularioServiceImpl implements  FormularioService {
     }
 
     @Override
+    public Set<Object[]> getFormularioPendienteNoEscoltaByCompaniaVuelo() {
+
+        return dao.getFormularioPendienteNoEscoltaByCompaniaVuelo();
+    }
+
+    @Override
     public Formulario findById(Long id){
         return dao.findById(id).orElse(null);
+    }
+
+    @Override
+    public Set<Object[]> getFormularioPendienteEscoltaByCompaniaVuelo() {
+
+        return dao.getFormularioPendienteEscoltaByCompaniaVuelo();
     }
 
     @Override
