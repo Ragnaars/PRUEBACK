@@ -17,7 +17,7 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     @Query("SELECT new org.dgac.cl.model.view.FormularioPendiente(f.fechaHoraVuelo, f.companiaVuelo, f.requiereEscolta, COUNT(f) OVER (PARTITION BY f.companiaVuelo)) FROM Formulario f WHERE f.traslado is null AND f.requiereEscolta = ?1")
     public Set<FormularioPendiente> getCountFormularioPendienteByCompaniaVuelo(Boolean escolta);
 
-    @Query("SELECT new org.dgac.cl.model.view.FormularioPendiente(f.id, f.fechaHoraVuelo, f.companiaVuelo, f.requiereEscolta) FROM Formulario f WHERE f.traslado is null AND f.requiereEscolta = ?1 AND f.companiaVuelo = ")
+    @Query("SELECT new org.dgac.cl.model.view.FormularioPendiente(f.id, f.fechaHoraVuelo, f.companiaVuelo, f.requiereEscolta) FROM Formulario f WHERE f.traslado is null AND f.requiereEscolta = ?1")
     public Set<FormularioPendiente> getFormularioPendienteByCompaniaVuelo(Boolean escolta, CompaniaVueloId companiaVueloId);
 
     // formularios asignados a traslado
