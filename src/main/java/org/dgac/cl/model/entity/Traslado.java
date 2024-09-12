@@ -1,12 +1,16 @@
 package org.dgac.cl.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,7 +41,7 @@ public class Traslado {
     @Column(name = "trsd_evidencia")
     private String evidencia;
 
-    @Column(name = "trsd_fecha_hora_entrega")
+    @Column(name = "trsd_fecha_hora_entrega", insertable = false, updatable = false)
     private LocalDateTime fechaHoraEntrega;
 
     @Column(name = "trsd_habilitado")
@@ -45,4 +49,8 @@ public class Traslado {
 
     @Column(name = "trsd_fecha_creacion")
     private LocalDateTime fechaCreacion;
+
+    @OneToMany(mappedBy = "traslado")
+    @JsonIgnoreProperties({"traslado"})
+    private List<Formulario> formularios;
 }
