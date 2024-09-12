@@ -91,13 +91,13 @@ public class FormularioController {
     }
 
     @GetMapping("/pendienteEscolta")
-    public ResponseEntity<?> pendienteEscolta() {
-        return ResponseEntity.ok(negocio.getFormularioPendienteEscoltaByCompaniaVuelo());
+    public ResponseEntity<?> pendienteEscolta(@RequestParam Integer companiaAerea, @RequestParam Integer numeroVuelo) {
+        return ResponseEntity.ok(negocio.getFormularioPendienteEscoltaByCompaniaVuelo(companiaAerea, numeroVuelo));
     }
 
     @GetMapping("/pendienteNoEscolta")
-    public ResponseEntity<?> pendienteNoEscolta() {
-        return ResponseEntity.ok(negocio.getFormularioPendienteNoEscoltaByCompaniaVuelo());
+    public ResponseEntity<?> pendienteNoEscolta(@RequestParam Integer companiaAerea, @RequestParam Integer numeroVuelo) {
+        return ResponseEntity.ok(negocio.getFormularioPendienteNoEscoltaByCompaniaVuelo(companiaAerea, numeroVuelo));
     }
 
     @PostMapping("/registroFormularioFase2")

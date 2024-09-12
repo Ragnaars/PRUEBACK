@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.Objects;
 import org.dgac.cl.constantes.ConstantesEstadoFormulario;
 import org.dgac.cl.filter.FormularioFilter;
+import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.EstadoFormulario;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.service.CompaniaVueloService;
@@ -140,12 +141,12 @@ public class FormularioNegocio {
         return service.getCountFormularioPendienteByCompaniaVuelo(true);
     }
     
-    public Set<FormularioPendiente> getFormularioPendienteNoEscoltaByCompaniaVuelo() {
-        return service.getFormularioPendienteByCompaniaVuelo(false);
+    public Set<FormularioPendiente> getFormularioPendienteNoEscoltaByCompaniaVuelo(Integer companiaAerea, Integer numeroVuelo) {
+        return service.getFormularioPendienteByCompaniaVuelo(false, CompaniaVuelo.builder().numeroVuelo(numeroVuelo).companiaAerea(companiaAerea).build());
     }
 
-    public Set<FormularioPendiente> getFormularioPendienteEscoltaByCompaniaVuelo() {
-        return service.getFormularioPendienteByCompaniaVuelo(true);
+    public Set<FormularioPendiente> getFormularioPendienteEscoltaByCompaniaVuelo(Integer companiaAerea, Integer numeroVuelo) {
+        return service.getFormularioPendienteByCompaniaVuelo(true, CompaniaVuelo.builder().numeroVuelo(numeroVuelo).companiaAerea(companiaAerea).build());
     }
 
 }

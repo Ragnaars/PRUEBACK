@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.dgac.cl.model.dao.FormularioDAO;
+import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.view.FormularioPendiente;
 import org.dgac.cl.model.view.FormularioPendienteDetalle;
@@ -47,9 +48,9 @@ public class FormularioServiceImpl implements FormularioService {
     }
 
     @Override
-    public Set<FormularioPendiente> getFormularioPendienteByCompaniaVuelo(Boolean escolta) {
+    public Set<FormularioPendiente> getFormularioPendienteByCompaniaVuelo(Boolean escolta, CompaniaVuelo companiaVuelo) {
         
-        return dao.getFormularioPendienteByCompaniaVuelo(escolta);
+        return dao.getFormularioPendienteByCompaniaVuelo(escolta, companiaVuelo);
     }
 
     @Override
