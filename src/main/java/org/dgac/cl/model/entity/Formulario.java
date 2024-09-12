@@ -114,8 +114,17 @@ public class Formulario {
     @JoinColumn(name="frml_user_avsec_retira")
     private Usuario userAvsecRetira;
 
+
+    @Column(name="frml_user_avsec_retira_tica")
+    private String userAvsecRetiraTica;
+
+    @Column(name="frml_user_avsec_retira_nombre")
+    private String userAvsecRetiraNombre;
+
     @Column(name="frml_user_avsec_retira_firma")
     private String userAvsecRetiraFirma;
+
+
 
     //foranea
     @ManyToOne
@@ -137,6 +146,9 @@ public class Formulario {
 
     @Column(name = "frml_usuario_compania_nombre")
     private String usuarioCompaniaNombre;
+
+    @Column(name = "frml_fecha_hora_retiro")
+    private LocalDateTime fechaHoraRetiro;
 
     @Column(name = "frml_pax_firma")
     private String paxFirma;
@@ -163,7 +175,5 @@ public class Formulario {
     @Column(name="frml_requiere_traslado")
     private Boolean requiereTraslado;
 
-    public Formulario(FormularioDTO formulario) {
-        
-    }
+    public Formulario(FormularioDTO formulario) {}
 }

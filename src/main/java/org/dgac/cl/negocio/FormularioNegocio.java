@@ -1,6 +1,7 @@
 package org.dgac.cl.negocio;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.dgac.cl.constantes.ConstantesEstadoFormulario;
 import org.dgac.cl.filter.FormularioFilter;
@@ -83,7 +84,34 @@ public class FormularioNegocio {
 
 
         return formulario;
-    }   
+    }
+    
+    public Formulario registroFase2(Formulario formulario) throws Exception {
+    
+        // Verificar que el estado actual del formulario sea PENDIENTE
+        if (formulario.getEstado() == null || !Objects.equals(formulario.getEstado().getId(), ConstantesEstadoFormulario.PENDIENTE)) {
+            throw new Exception("El formulario no está en estado PENDIENTE.");
+        }
+    
+        Boolean requiereTraslado = formulario.getRequiereTraslado();
+        if (requiereTraslado == null) {
+            throw new Exception("El atributo 'requiereTraslado' no puede ser nulo.");
+        }
+    
+        // Si requiere traslado, cambiar el estado a RETIRO
+        if (requiereTraslado) {
+            formulario.setEstado(EstadoFormulario.builder().id(ConstantesEstadoFormulario.RETIRO).build());
+        } else {
+            // Si no requiere traslado, cambiar el estado a CERRADO
+            formulario.setEstado(EstadoFormulario.builder().id(ConstantesEstadoFormulario.CERRADO).build());
+        }
+    
+        // Guardar el formulario actualizado en la base de datos
+        final Formulario formularioActualizado = service.save(formulario);
+    
+        // Retornar el formulario actualizado
+        return formularioActualizado;
+    }
     
     /**
      * deshabilita un formulario
