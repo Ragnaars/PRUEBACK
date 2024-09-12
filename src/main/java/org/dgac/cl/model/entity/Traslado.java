@@ -3,6 +3,8 @@ package org.dgac.cl.model.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,7 +50,7 @@ public class Traslado {
     @Column(name = "trsd_fecha_creacion")
     private LocalDateTime fechaCreacion;
 
-    // Relación OneToMany con Formulario
     @OneToMany(mappedBy = "traslado")
+    @JsonIgnoreProperties({"traslado"})
     private List<Formulario> formularios;
 }
