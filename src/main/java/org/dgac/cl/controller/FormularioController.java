@@ -80,14 +80,24 @@ public class FormularioController {
         return ResponseEntity.ok(negocio.registroFase1(formulario));
     }
 
-    @GetMapping("/pendienteNoEscolta")
-    public ResponseEntity<?> pendienteNoEscolta() {
-        return ResponseEntity.ok(negocio.getFormularioPendienteNoEscoltaByCompaniaVuelo());
+    @GetMapping("/pendienteCountNoEscolta")
+    public ResponseEntity<?> pendienteCountNoEscolta() {
+        return ResponseEntity.ok(negocio.getCountFormularioPendienteNoEscoltaByCompaniaVuelo());
+    }
+
+    @GetMapping("/pendienteCountEscolta")
+    public ResponseEntity<?> pendienteCountEscolta() {
+        return ResponseEntity.ok(negocio.getCountFormularioPendienteEscoltaByCompaniaVuelo());
     }
 
     @GetMapping("/pendienteEscolta")
     public ResponseEntity<?> pendienteEscolta() {
         return ResponseEntity.ok(negocio.getFormularioPendienteEscoltaByCompaniaVuelo());
+    }
+
+    @GetMapping("/pendienteNoEscolta")
+    public ResponseEntity<?> pendienteNoEscolta() {
+        return ResponseEntity.ok(negocio.getFormularioPendienteNoEscoltaByCompaniaVuelo());
     }
 
     @PostMapping("/registroFormularioFase2")

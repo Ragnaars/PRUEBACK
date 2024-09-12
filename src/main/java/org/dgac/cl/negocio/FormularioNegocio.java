@@ -10,6 +10,8 @@ import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.service.CompaniaVueloService;
 import org.dgac.cl.model.service.FormularioService;
 import org.dgac.cl.model.service.ObjetoRetenidoService;
+import org.dgac.cl.model.view.FormularioPendiente;
+import org.dgac.cl.model.view.FormularioPendienteDetalle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -130,11 +132,20 @@ public class FormularioNegocio {
         service.save(formulario);
     }
 
-    public Set<Object[]> getFormularioPendienteNoEscoltaByCompaniaVuelo() {
-        return service.getFormularioPendienteNoEscoltaByCompaniaVuelo();
+    public Set<FormularioPendiente> getCountFormularioPendienteNoEscoltaByCompaniaVuelo() {
+        return service.getCountFormularioPendienteByCompaniaVuelo(false);
     }
 
-    public Set<Object[]> getFormularioPendienteEscoltaByCompaniaVuelo() {
-        return service.getFormularioPendienteEscoltaByCompaniaVuelo();
+    public Set<FormularioPendiente> getCountFormularioPendienteEscoltaByCompaniaVuelo() {
+        return service.getCountFormularioPendienteByCompaniaVuelo(true);
     }
+    
+    public Set<FormularioPendiente> getFormularioPendienteNoEscoltaByCompaniaVuelo() {
+        return service.getFormularioPendienteByCompaniaVuelo(false);
+    }
+
+    public Set<FormularioPendiente> getFormularioPendienteEscoltaByCompaniaVuelo() {
+        return service.getFormularioPendienteByCompaniaVuelo(true);
+    }
+
 }
