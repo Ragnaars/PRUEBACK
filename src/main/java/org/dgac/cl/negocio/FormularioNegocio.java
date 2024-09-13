@@ -1,10 +1,12 @@
 package org.dgac.cl.negocio;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 import org.dgac.cl.constantes.ConstantesEstadoFormulario;
 import org.dgac.cl.filter.FormularioFilter;
+import org.dgac.cl.model.dto.FormularioPendienteFiltro;
 import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.EstadoFormulario;
 import org.dgac.cl.model.entity.Formulario;
@@ -133,12 +135,14 @@ public class FormularioNegocio {
         service.save(formulario);
     }
 
-    public Set<FormularioPendiente> getCountFormularioPendienteNoEscoltaByCompaniaVuelo() {
-        return service.getCountFormularioPendienteByCompaniaVuelo(false);
+    public Set<FormularioPendiente> getCountFormularioPendienteNoEscoltaByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+        filtro.setEscolta(false);
+        return service.getCountFormularioPendienteByCompaniaVuelo(filtro);
     }
 
-    public Set<FormularioPendiente> getCountFormularioPendienteEscoltaByCompaniaVuelo() {
-        return service.getCountFormularioPendienteByCompaniaVuelo(true);
+    public Set<FormularioPendiente> getCountFormularioPendienteEscoltaByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+        filtro.setEscolta(true);
+        return service.getCountFormularioPendienteByCompaniaVuelo(filtro);
     }
     
     public Set<FormularioPendiente> getFormularioPendienteNoEscoltaByCompaniaVuelo(Integer companiaAerea, Integer numeroVuelo) {

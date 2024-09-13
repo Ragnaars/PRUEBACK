@@ -1,12 +1,12 @@
 package org.dgac.cl.model.dto;
 
 import java.time.LocalDateTime;
+
 import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.EstadoFormulario;
-import org.dgac.cl.model.entity.PuenteEmbarque;
 import org.dgac.cl.model.entity.Traslado;
-import org.dgac.cl.model.entity.UnidadAeroportuaria;
 import org.dgac.cl.model.entity.Usuario;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

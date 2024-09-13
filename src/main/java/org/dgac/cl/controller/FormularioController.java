@@ -1,10 +1,14 @@
 package org.dgac.cl.controller;
 
+import java.time.LocalDate;
+
 import org.dgac.cl.filter.FormularioFilter;
+import org.dgac.cl.model.dto.FormularioPendienteFiltro;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.negocio.FormularioNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,37 +29,36 @@ public class FormularioController {
     private FormularioNegocio negocio;
 
     @GetMapping("/")
-    public ResponseEntity<?> findAll(){
+    public ResponseEntity<?> findAll() {
         return ResponseEntity.ok(negocio.findAll());
     }
 
     @GetMapping("/page")
     public ResponseEntity<?> findAllPage(
-        @RequestParam(defaultValue = "0") Integer page,
-        @RequestParam(defaultValue = "5") Integer size,
-        @RequestParam(required = false) String paxNombre,
-        @RequestParam(required = false) Integer companiaAerea,
-        @RequestParam(required = false) Integer estado,
-        @RequestParam(required = false) String destino,
-        @RequestParam(required = false) String origen)
-        {
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "5") Integer size,
+            @RequestParam(required = false) String paxNombre,
+            @RequestParam(required = false) Integer companiaAerea,
+            @RequestParam(required = false) Integer estado,
+            @RequestParam(required = false) String destino,
+            @RequestParam(required = false) String origen) {
         FormularioFilter filtro = FormularioFilter.builder()
-            .paxNombre(paxNombre)
-            .companiaAerea(companiaAerea)
-            .estado(estado)
-            .destino(destino)
-            .origen(origen)
-            .build();
+                .paxNombre(paxNombre)
+                .companiaAerea(companiaAerea)
+                .estado(estado)
+                .destino(destino)
+                .origen(origen)
+                .build();
         return ResponseEntity.ok().body(negocio.findAllPage(filtro, PageRequest.of(page, size)));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id){
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         return ResponseEntity.ok(negocio.findById(id));
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> save(@RequestBody Formulario formulario){
+    public ResponseEntity<?> save(@RequestBody Formulario formulario) {
         return ResponseEntity.ok(negocio.save(formulario));
     }
 
@@ -66,10 +69,10 @@ public class FormularioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable Long id) throws Exception{
+    public ResponseEntity<?> deleteById(@PathVariable Long id) throws Exception {
         try {
             ResponseEntity<?> result = negocio.deleteById(id);
-            return ResponseEntity.ok(result);    
+            return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -80,14 +83,33 @@ public class FormularioController {
         return ResponseEntity.ok(negocio.registroFase1(formulario));
     }
 
+    /*
+     * private Integer companiaAerea;
+     * private Integer numeroVuelo;
+     * private Integer puenteEmbarque;
+     * private LocalDate fechaDesde;
+     * private LocalDate fechaHasta;
+     */
+
     @GetMapping("/pendienteCountNoEscolta")
-    public ResponseEntity<?> pendienteCountNoEscolta() {
-        return ResponseEntity.ok(negocio.getCountFormularioPendienteNoEscoltaByCompaniaVuelo());
+    public ResponseEntity<?> pendienteCountNoEscolta(
+            @RequestParam(required = false) Integer companiaAerea,
+            @RequestParam(required = false) Integer numeroVuelo,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate fechaDesde,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate fechaHasta) {
+        return ResponseEntity.ok(negocio.getCountFormularioPendienteNoEscoltaByCompaniaVuelo(
+                FormularioPendienteFiltro.builder().companiaAerea(companiaAerea).numeroVuelo(numeroVuelo)
+                        .fechaDesde(fechaDesde).fechaHasta(fechaHasta).build()));
     }
 
     @GetMapping("/pendienteCountEscolta")
-    public ResponseEntity<?> pendienteCountEscolta() {
-        return ResponseEntity.ok(negocio.getCountFormularioPendienteEscoltaByCompaniaVuelo());
+    public ResponseEntity<?> pendienteCountEscolta(@RequestParam(required = false) Integer companiaAerea,
+            @RequestParam(required = false) Integer numeroVuelo,
+            @RequestParam(required = false) LocalDate fechaDesde,
+            @RequestParam(required = false) LocalDate fechaHasta) {
+        return ResponseEntity.ok(negocio.getCountFormularioPendienteEscoltaByCompaniaVuelo(
+                FormularioPendienteFiltro.builder().companiaAerea(companiaAerea).numeroVuelo(numeroVuelo)
+                        .fechaDesde(fechaDesde).fechaHasta(fechaHasta).build()));
     }
 
     @GetMapping("/pendienteEscolta")
@@ -96,7 +118,8 @@ public class FormularioController {
     }
 
     @GetMapping("/pendienteNoEscolta")
-    public ResponseEntity<?> pendienteNoEscolta(@RequestParam Integer companiaAerea, @RequestParam Integer numeroVuelo) {
+    public ResponseEntity<?> pendienteNoEscolta(@RequestParam Integer companiaAerea,
+            @RequestParam Integer numeroVuelo) {
         return ResponseEntity.ok(negocio.getFormularioPendienteNoEscoltaByCompaniaVuelo(companiaAerea, numeroVuelo));
     }
 
@@ -105,4 +128,3 @@ public class FormularioController {
         return ResponseEntity.ok(negocio.registroFase2(formulario));
     }
 }
-
