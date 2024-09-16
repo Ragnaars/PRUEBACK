@@ -28,20 +28,20 @@ public class FormularioServiceImpl implements FormularioService {
     @Override
     public Set<FormularioPendiente> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         
-        ZoneId defaultZoneId = ZoneId.systemDefault();
+        //ZoneId defaultZoneId = ZoneId.systemDefault();
         //Date fechaDesde = Date.from(filtro.getFechaDesde().atStartOfDay(defaultZoneId).toInstant());
         //Date fechaHasta = filtro.getFechaHasta() != null? Date.from(filtro.getFechaHasta().atStartOfDay(defaultZoneId).toInstant()) : null;
 
+        
+        /*
         Timestamp fechaDesde = Timestamp.valueOf(filtro.getFechaDesde().atStartOfDay());
         Timestamp fechaHasta = Timestamp.valueOf(filtro.getFechaHasta().atStartOfDay());
-
-        /*
-         * return dao.getCountFormularioPendienteByCompaniaVuelo(filtro.getEscolta(), filtro.getCompaniaAerea(),
+        * return dao.getCountFormularioPendienteByCompaniaVuelo(filtro.getEscolta(), filtro.getCompaniaAerea(),
             filtro.getNumeroVuelo(), filtro.getPuenteEmbarque(), filtro.getFechaDesde(), filtro.getFechaHasta());
          */
 
         return dao.getCountFormularioPendienteByCompaniaVuelo(filtro.getEscolta(), filtro.getCompaniaAerea(),
-            filtro.getNumeroVuelo(), filtro.getPuenteEmbarque(), fechaDesde, fechaHasta);
+            filtro.getNumeroVuelo(), filtro.getPuenteEmbarque());
     }
 
     @Override

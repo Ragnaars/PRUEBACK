@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.dgac.cl.filter.FormularioFilter;
 import org.dgac.cl.model.dto.FormularioPendienteFiltro;
+import org.dgac.cl.model.dto.TrasladoRegistro;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.negocio.FormularioNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,14 +84,6 @@ public class FormularioController {
         return ResponseEntity.ok(negocio.registroFase1(formulario));
     }
 
-    /*
-     * private Integer companiaAerea;
-     * private Integer numeroVuelo;
-     * private Integer puenteEmbarque;
-     * private LocalDate fechaDesde;
-     * private LocalDate fechaHasta;
-     */
-
     @GetMapping("/pendienteCountNoEscolta")
     public ResponseEntity<?> pendienteCountNoEscolta(
             @RequestParam(required = false) Integer companiaAerea,
@@ -123,8 +116,13 @@ public class FormularioController {
         return ResponseEntity.ok(negocio.getFormularioPendienteNoEscoltaByCompaniaVuelo(companiaAerea, numeroVuelo));
     }
 
-    @PostMapping("/registroFormularioFase2")
-    public ResponseEntity<?> registroFormularioFase2(@RequestBody Formulario formulario) throws Exception {
-        return ResponseEntity.ok(negocio.registroFase2(formulario));
+    @PostMapping("/registroTrasladoNoEscolta")
+    public ResponseEntity<?> registroTrasladoNoEscolta(@RequestBody TrasladoRegistro formulario) throws Exception {
+        return ResponseEntity.ok(negocio.registroTrasladoNoEscolta(formulario));
+    }
+
+    @PostMapping("/registroTrasladoEscolta")
+    public ResponseEntity<?> registroTrasladoEscolta(@RequestBody Formulario formulario) throws Exception {
+        return ResponseEntity.ok(negocio.registroTrasladoEscolta(formulario));
     }
 }

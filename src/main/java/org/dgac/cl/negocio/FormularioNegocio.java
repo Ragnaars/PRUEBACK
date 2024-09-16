@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.dgac.cl.constantes.ConstantesEstadoFormulario;
 import org.dgac.cl.filter.FormularioFilter;
 import org.dgac.cl.model.dto.FormularioPendienteFiltro;
+import org.dgac.cl.model.dto.TrasladoRegistro;
 import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.EstadoFormulario;
 import org.dgac.cl.model.entity.Formulario;
@@ -91,33 +92,41 @@ public class FormularioNegocio {
         return formulario;
     }
     
-    public Formulario registroFase2(Formulario formulario) throws Exception {
+    public Formulario registroTrasladoNoEscolta(TrasladoRegistro traslado) throws Exception {
     
         // Verificar que el estado actual del formulario sea PENDIENTE
+        /*
         if (formulario.getEstado() == null || !Objects.equals(formulario.getEstado().getId(), ConstantesEstadoFormulario.PENDIENTE)) {
             throw new Exception("El formulario no está en estado PENDIENTE.");
-        }
+            }
+            * 
+            Boolean requiereTraslado = formulario.getRequiereEscolta();
+            if (requiereTraslado == null) {
+                throw new Exception("El atributo 'requiereTraslado' no puede ser nulo.");
+            }
+        
+            // Si requiere traslado, cambiar el estado a RETIRO
+            if (requiereTraslado) {
+                formulario.setEstado(EstadoFormulario.builder().id(ConstantesEstadoFormulario.RETIRO).build());
+            } else {
+                // Si no requiere traslado, cambiar el estado a CERRADO
+                formulario.setEstado(EstadoFormulario.builder().id(ConstantesEstadoFormulario.CERRADO).build());
+            }
+        
+            // Guardar el formulario actualizado en la base de datos
+            final Formulario formularioActualizado = service.save(formulario);
+        
+            // Retornar el formulario actualizado
+            return formularioActualizado;
+         */
     
-        Boolean requiereTraslado = formulario.getRequiereEscolta();
-        if (requiereTraslado == null) {
-            throw new Exception("El atributo 'requiereTraslado' no puede ser nulo.");
-        }
-    
-        // Si requiere traslado, cambiar el estado a RETIRO
-        if (requiereTraslado) {
-            formulario.setEstado(EstadoFormulario.builder().id(ConstantesEstadoFormulario.RETIRO).build());
-        } else {
-            // Si no requiere traslado, cambiar el estado a CERRADO
-            formulario.setEstado(EstadoFormulario.builder().id(ConstantesEstadoFormulario.CERRADO).build());
-        }
-    
-        // Guardar el formulario actualizado en la base de datos
-        final Formulario formularioActualizado = service.save(formulario);
-    
-        // Retornar el formulario actualizado
-        return formularioActualizado;
+         return null;
     }
     
+    public Formulario registroTrasladoEscolta(Formulario formulario) throws Exception {
+        return null;
+    }
+
     /**
      * deshabilita un formulario
      * @param id

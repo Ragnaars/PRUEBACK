@@ -32,16 +32,12 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "AND f.requiereEscolta = :escolta "
     + "AND (:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea)"
     + "AND (:numeroVuelo IS NULL OR f.companiaVuelo.numeroVuelo = :numeroVuelo)"
-    + "AND (:puenteEmbarque IS NULL OR f.puenteEmbarque = :puenteEmbarque)"
-    + "AND (:fechaDesde IS NULL OR CAST(f.fechaHoraVuelo as Date) >= :fechaDesde)"
-    + "AND (:fechaHasta IS NULL OR CAST(f.fechaHoraVuelo as Date) <= :fechaHasta)")
+    + "AND (:puenteEmbarque IS NULL OR f.puenteEmbarque = :puenteEmbarque)")
     public Set<FormularioPendiente> getCountFormularioPendienteByCompaniaVuelo(
         @Param("escolta") Boolean escolta,
         @Param("companiaAerea") Integer companiaAerea,
         @Param("numeroVuelo") Integer numeroVuelo,
-        @Param("puenteEmbarque") Integer puenteEmbarque,
-        @Param("fechaDesde") Timestamp fechaDesde,
-        @Param("fechaHasta") Timestamp fechaHasta);
+        @Param("puenteEmbarque") Integer puenteEmbarque);
 
     // formularios pendientes no agrupados con detalle de formulario
     @Query("SELECT new org.dgac.cl.model.view.FormularioPendiente("
