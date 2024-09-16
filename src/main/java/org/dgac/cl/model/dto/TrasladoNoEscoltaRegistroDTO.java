@@ -1,6 +1,7 @@
 package org.dgac.cl.model.dto;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +18,7 @@ public class TrasladoNoEscoltaRegistroDTO {
     private String usroCompTica;
     private Boolean usroCompTicaProvisorio;
     private String usroCompEvidencia;
+    private String usroCompNombre;
     private LocalDateTime fechaHora;
+    private LocalTime horaVuelo;
 }

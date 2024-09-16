@@ -43,6 +43,9 @@ public class Traslado {
     @Column(name = "trsd_avsec_turno")
     private String avsecTurno;
 
+    @Column(name = "trsd_avsec_nombre")
+    private String avsecNombre;
+
     @Column(name = "trsd_usro_comp_tica")
     private String usroCompTica;
 
@@ -51,6 +54,9 @@ public class Traslado {
 
     @Column(name = "trsd_usro_comp_evidencia")
     private String usroCompEvidencia;
+
+    @Column(name = "trsd_usro_comp_nombre")
+    private String usroCompNombre;
 
     @ManyToOne
     @JoinColumn(name = "trsd_puente_embarque")
@@ -77,6 +83,9 @@ public class Traslado {
     @Column(name = "trsd_zz_receptor_evidencia")
     private String receptorZZEvidencia;
 
+    @Column(name = "trsd_zz_receptor_nombre")
+    private String receptorZZNombre;
+
     @Column(name = "trsd_cot_tica")
     private String cotTica;
 
@@ -85,6 +94,9 @@ public class Traslado {
 
     @Column(name = "trsd_cot_evidencia")
     private String cotEvidencia;
+
+    @Column(name = "trsd_cot_nombre")
+    private String cotNombre;
 
     @Column(name = "trsd_bodega_tica")
     private String bodegaTica;
@@ -95,23 +107,27 @@ public class Traslado {
     @Column(name = "trsd_bodega_evidencia")
     private String bodegaEvidencia;
 
+    @Column(name = "trsd_bodega_nombre")
+    private String bodegaNombre;
+
     @Column(name = "trsd_observacion")
     private String observacion;
 
     @Column(name = "trsd_requiere_escolta")
     private Boolean requiereEscolta;
 
-    @Column(name = "trsd_fecha_hora")
+    @Column(name = "trsd_fecha_hora", insertable = false, updatable = false)
     private LocalDateTime fechaHora;
 
-    @Column(name = "trsd_estado")
-    private Integer estado;
-
-    @Column(name = "trsd_fecha_hora_creacion")
+    @Column(name = "trsd_fecha_hora_creacion", insertable = false, updatable = false)
     private LocalDateTime fechaHoraCreacion;
 
     @Column(name = "trsd_habilitado")
     private Boolean habilitado;
+
+    @ManyToOne
+    @JoinColumn(name = "trsd_estado")
+    private EstadoFormulario estadoTraslado;
 
     @OneToMany(mappedBy = "traslado")
     @JsonIgnoreProperties({"traslado"})

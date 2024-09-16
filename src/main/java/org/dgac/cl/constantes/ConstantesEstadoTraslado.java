@@ -1,6 +1,6 @@
 package org.dgac.cl.constantes;
 
-public class ConstantesEstadoFormulario {
+public class ConstantesEstadoTraslado {
     public static final Integer PENDIENTE = 1;
     public static final Integer EN_TRASLADO = 2;
     public static final Integer ENTREGADO = 3;
