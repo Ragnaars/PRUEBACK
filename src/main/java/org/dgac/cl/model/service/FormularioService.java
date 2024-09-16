@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 public interface FormularioService {
     public List<Formulario> findAll();
+    public List<Formulario> findAllById(List<Long> ids);
     public Page<Formulario> findAllPage(Specification<Formulario> specification, Pageable pageable);
     public Formulario findById(Long id);
     public Formulario save(Formulario formulario);

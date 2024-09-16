@@ -24,6 +24,12 @@ public class FormularioServiceImpl implements FormularioService {
 
     @Autowired
     private FormularioDAO dao;
+    
+    @Override
+    public List<Formulario> findAllById(List<Long> ids) {
+
+       return dao.findAllById(ids);
+    }
 
     @Override
     public Set<FormularioPendiente> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro) {

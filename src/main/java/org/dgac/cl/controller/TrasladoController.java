@@ -1,7 +1,10 @@
 package org.dgac.cl.controller;
 
+import org.dgac.cl.model.dto.TrasladoNoEscoltaRegistroDTO;
+import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.entity.Traslado;
 import org.dgac.cl.model.service.TrasladoService;
+import org.dgac.cl.negocio.TrasladoNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/traslado")
 public class TrasladoController {
+
+    @Autowired TrasladoNegocio negocio;
 
     @Autowired
     private TrasladoService servicio;
@@ -33,6 +38,14 @@ public class TrasladoController {
         return ResponseEntity.ok(servicio.save(traslado));
     }
 
+    @PostMapping("/registroTrasladoNoEscolta")
+    public ResponseEntity<?> registroTrasladoNoEscolta(@RequestBody TrasladoNoEscoltaRegistroDTO formulario) throws Exception {
+        return ResponseEntity.ok(negocio.registroTrasladoNoEscolta(formulario));
+    }
 
+    @PostMapping("/registroTrasladoEscolta")
+    public ResponseEntity<?> registroTrasladoEscolta(@RequestBody Formulario formulario) throws Exception {
+        return ResponseEntity.ok(negocio.registroTrasladoEscolta(formulario));
+    }
 
 }
