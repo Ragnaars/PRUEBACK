@@ -1,5 +1,4 @@
 package org.dgac.cl.model.entity;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -133,6 +132,7 @@ public class Formulario {
 
     @ManyToOne
     @JoinColumn(name = "frml_traslado")
+    @JsonIgnoreProperties("formularios")
     private Traslado traslado;
 
     @Column(name = "frml_observacion")

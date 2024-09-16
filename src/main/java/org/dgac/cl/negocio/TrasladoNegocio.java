@@ -5,6 +5,7 @@ import org.dgac.cl.model.dto.TrasladoEscoltaRegistroDTO;
 import org.dgac.cl.model.dto.TrasladoNoEscoltaRegistroDTO;
 import org.dgac.cl.model.entity.EstadoFormulario;
 import org.dgac.cl.model.entity.Formulario;
+import org.dgac.cl.model.entity.PuenteEmbarque;
 import org.dgac.cl.model.entity.Traslado;
 import org.dgac.cl.model.service.FormularioService;
 import org.dgac.cl.model.service.TrasladoService;
@@ -26,8 +27,6 @@ public class TrasladoNegocio {
      * @throws Exception
      */
     public Traslado registroTrasladoNoEscolta(TrasladoNoEscoltaRegistroDTO trasladoRegistro) throws Exception {
-
-        System.out.println(trasladoRegistro.toString());
 
         // registrar traslado
         Traslado traslado = Traslado.builder()
@@ -57,7 +56,34 @@ public class TrasladoNegocio {
 
     }
 
-    public Formulario registroTrasladoEscolta(TrasladoEscoltaRegistroDTO formulario) throws Exception {
-        return null;
+    public Traslado registroTrasladoEscolta(TrasladoEscoltaRegistroDTO trasladoRegistro) throws Exception {
+
+        // registrar traslado
+        Traslado traslado = Traslado.builder()
+                .avsecNombre(trasladoRegistro.getAvsecNombre())
+                .avsecTica(trasladoRegistro.getAvsecTica())
+                .avsecTicaProvisorio(trasladoRegistro.getAvsecTicaProvisorio())
+                .avsecTurno(trasladoRegistro.getAvsecTurno())
+                .horaInicioEscolta(trasladoRegistro.getHoraInicioEscolta())
+                .puenteEmbarque(PuenteEmbarque.builder().id(trasladoRegistro.getPuenteEmbarque()).build())
+                //.fechaHora(trasladoRegistro.getFechaHora())
+                .requiereEscolta(true)
+                .estadoTraslado(EstadoFormulario.builder().id(ConstantesEstadoTraslado.EN_TRASLADO).build())
+                .build();
+
+        final Traslado trasladoFinal = trasladoService.save(traslado);
+
+        // asociar formularios
+        formularioService.findAllById(trasladoRegistro.getFormularios()).forEach(f -> {
+            f.setTraslado(Traslado.builder().id(trasladoFinal.getId()).build());
+            f.setRequiereEscolta(trasladoFinal.getRequiereEscolta());
+            f.setFechaHoraVuelo(f.getFechaHoraVuelo().with(trasladoRegistro.getHoraVuelo()));
+            formularioService.save(f);
+        });
+
+        // notificar
+
+        // retornar objeto
+        return trasladoFinal;
     }
 }
