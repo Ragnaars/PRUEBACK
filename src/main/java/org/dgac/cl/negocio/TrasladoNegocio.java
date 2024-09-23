@@ -6,7 +6,6 @@ import org.dgac.cl.constantes.ConstantesEstadoTraslado;
 import org.dgac.cl.model.dto.TrasladoEscoltaRegistroDTO;
 import org.dgac.cl.model.dto.TrasladoNoEscoltaRegistroDTO;
 import org.dgac.cl.model.entity.EstadoFormulario;
-import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.entity.PuenteEmbarque;
 import org.dgac.cl.model.entity.Traslado;
 import org.dgac.cl.model.service.FormularioService;
@@ -54,6 +53,10 @@ public class TrasladoNegocio {
             f.setTraslado(Traslado.builder().id(trasladoFinal.getId()).build());
             f.setRequiereEscolta(trasladoFinal.getRequiereEscolta());
             f.setFechaHoraVuelo(f.getFechaHoraVuelo().with(trasladoRegistro.getHoraVuelo()));
+            f.setUsuarioCompaniaFirma(trasladoFinal.getUsroCompEvidencia());
+            f.setUsuarioCompaniaNombre(trasladoFinal.getUsroCompNombre());
+            f.setUsuarioCompaniaTica(trasladoFinal.getUsroCompTica());
+
             formularioService.save(f);
         });
 
