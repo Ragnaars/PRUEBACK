@@ -1,5 +1,7 @@
 package org.dgac.cl.negocio;
 
+import java.util.List;
+
 import org.dgac.cl.constantes.ConstantesEstadoTraslado;
 import org.dgac.cl.model.dto.TrasladoEscoltaRegistroDTO;
 import org.dgac.cl.model.dto.TrasladoNoEscoltaRegistroDTO;
@@ -28,6 +30,12 @@ public class TrasladoNegocio {
      */
     public Traslado registroTrasladoNoEscolta(TrasladoNoEscoltaRegistroDTO trasladoRegistro) throws Exception {
 
+        List<Formulario> formularios = formularioService.findAllById(trasladoRegistro.getFormularios());
+
+        if(formularios.isEmpty()) {
+            throw new Exception("No se encontraron formularios asociados al traslado");
+        }
+
         // registrar traslado
         Traslado traslado = Traslado.builder()
                 .usroCompNombre(trasladoRegistro.getUsroCompNombre())
@@ -42,7 +50,7 @@ public class TrasladoNegocio {
         final Traslado trasladoFinal = trasladoService.save(traslado);
 
         // asociar formularios
-        formularioService.findAllById(trasladoRegistro.getFormularios()).forEach(f -> {
+        formularios.forEach(f -> {
             f.setTraslado(Traslado.builder().id(trasladoFinal.getId()).build());
             f.setRequiereEscolta(trasladoFinal.getRequiereEscolta());
             f.setFechaHoraVuelo(f.getFechaHoraVuelo().with(trasladoRegistro.getHoraVuelo()));
@@ -57,6 +65,13 @@ public class TrasladoNegocio {
     }
 
     public Traslado registroTrasladoEscolta(TrasladoEscoltaRegistroDTO trasladoRegistro) throws Exception {
+
+        List<Formulario> formularios = formularioService.findAllById(trasladoRegistro.getFormularios());
+
+        // valdiar formularios
+        if(formularios.isEmpty()) {
+            throw new Exception("No se encontraron formularios asociados al traslado");
+        }
 
         // registrar traslado
         Traslado traslado = Traslado.builder()
