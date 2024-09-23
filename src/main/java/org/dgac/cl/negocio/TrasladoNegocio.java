@@ -6,6 +6,7 @@ import org.dgac.cl.constantes.ConstantesEstadoTraslado;
 import org.dgac.cl.model.dto.TrasladoEscoltaRegistroDTO;
 import org.dgac.cl.model.dto.TrasladoNoEscoltaRegistroDTO;
 import org.dgac.cl.model.entity.EstadoFormulario;
+import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.entity.PuenteEmbarque;
 import org.dgac.cl.model.entity.Traslado;
 import org.dgac.cl.model.service.FormularioService;

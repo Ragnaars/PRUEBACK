@@ -51,4 +51,21 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     public Set<FormularioPendiente> getFormularioPendienteByCompaniaVuelo(@Param("escolta") Boolean escolta, @Param("companiaVuelo") CompaniaVuelo companiaVuelo);
 
     // formularios asignados a traslado
+
+    @Query("SELECT new org.dgac.cl.model.view.FormularioPendiente(" 
+    + "f.fechaHoraVuelo, "
+    + "f.companiaVuelo, "
+    + "f.requiereEscolta, "
+    + "COUNT(f) OVER (PARTITION BY f.companiaVuelo, f.fechaHoraVuelo, f.traslado), "
+    + "f.puenteEmbarque, "
+    + "f.origen, "
+    + "f.destino) FROM Formulario f WHERE " 
+    + "f.traslado is not null " 
+    + "AND (:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea)"
+    + "AND (:numeroVuelo IS NULL OR f.companiaVuelo.numeroVuelo = :numeroVuelo)"
+    + "AND (:puenteEmbarque IS NULL OR f.puenteEmbarque = :puenteEmbarque)")
+    public Set<FormularioPendiente> getCountFormularioTrasladoByCompaniaVuelo(
+        @Param("companiaAerea") Integer companiaAerea,
+        @Param("numeroVuelo") Integer numeroVuelo,
+        @Param("puenteEmbarque") Integer puenteEmbarque);
 }

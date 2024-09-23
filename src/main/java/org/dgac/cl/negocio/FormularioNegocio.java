@@ -45,7 +45,6 @@ public class FormularioNegocio {
         return service.save(formulario);
     }
 
-    @DeleteMapping("/formulario/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         try {
             Formulario formularioExistente = service.findById(id);
@@ -124,4 +123,8 @@ public class FormularioNegocio {
         return service.getFormularioPendienteByCompaniaVuelo(true, CompaniaVuelo.builder().numeroVuelo(numeroVuelo).companiaAerea(companiaAerea).build());
     }
 
+    public Set<FormularioPendiente> getCountFormularioTrasladoByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+        filtro.setEscolta(false);
+        return service.getCountFormularioByCompaniaVuelo(filtro);
+    }
 }

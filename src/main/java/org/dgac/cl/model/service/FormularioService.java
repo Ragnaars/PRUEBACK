@@ -1,6 +1,5 @@
 package org.dgac.cl.model.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -21,4 +20,6 @@ public interface FormularioService {
     public void deleteById(Long id);
     public Set<FormularioPendiente> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro);
     public Set<FormularioPendiente> getFormularioPendienteByCompaniaVuelo(Boolean escolta, CompaniaVuelo companiaVuelo);
+    public Set<FormularioPendiente> getCountFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro);
+    public Set<FormularioPendiente> getFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro);
 }

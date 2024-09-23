@@ -32,6 +32,18 @@ public class FormularioServiceImpl implements FormularioService {
     }
 
     @Override
+    public Set<FormularioPendiente> getCountFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+        
+        return dao.getCountFormularioTrasladoByCompaniaVuelo(filtro.getCompaniaAerea(), filtro.getNumeroVuelo(), filtro.getPuenteEmbarque());
+    }
+
+    @Override
+    public Set<FormularioPendiente> getFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+        
+        return dao.getFormularioPendienteByCompaniaVuelo(null, null);
+    }
+
+    @Override
     public Set<FormularioPendiente> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         
         //ZoneId defaultZoneId = ZoneId.systemDefault();
