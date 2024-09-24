@@ -12,7 +12,7 @@ import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.service.CompaniaVueloService;
 import org.dgac.cl.model.service.FormularioService;
 import org.dgac.cl.model.service.ObjetoRetenidoService;
-import org.dgac.cl.model.view.FormularioPendiente;
+import org.dgac.cl.model.view.FormularioPendienteView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -105,26 +105,25 @@ public class FormularioNegocio {
         service.save(formulario);
     }
 
-    public Set<FormularioPendiente> getCountFormularioPendienteNoEscoltaByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+    public Set<FormularioPendienteView> getCountFormularioPendienteNoEscoltaByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         filtro.setEscolta(false);
         return service.getCountFormularioPendienteByCompaniaVuelo(filtro);
     }
 
-    public Set<FormularioPendiente> getCountFormularioPendienteEscoltaByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+    public Set<FormularioPendienteView> getCountFormularioPendienteEscoltaByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         filtro.setEscolta(true);
         return service.getCountFormularioPendienteByCompaniaVuelo(filtro);
     }
     
-    public Set<FormularioPendiente> getFormularioPendienteNoEscoltaByCompaniaVuelo(Integer companiaAerea, Integer numeroVuelo) {
+    public Set<FormularioPendienteView> getFormularioPendienteNoEscoltaByCompaniaVuelo(Integer companiaAerea, Integer numeroVuelo) {
         return service.getFormularioPendienteByCompaniaVuelo(false, CompaniaVuelo.builder().numeroVuelo(numeroVuelo).companiaAerea(companiaAerea).build());
     }
 
-    public Set<FormularioPendiente> getFormularioPendienteEscoltaByCompaniaVuelo(Integer companiaAerea, Integer numeroVuelo) {
+    public Set<FormularioPendienteView> getFormularioPendienteEscoltaByCompaniaVuelo(Integer companiaAerea, Integer numeroVuelo) {
         return service.getFormularioPendienteByCompaniaVuelo(true, CompaniaVuelo.builder().numeroVuelo(numeroVuelo).companiaAerea(companiaAerea).build());
     }
 
-    public Set<FormularioPendiente> getCountFormularioTrasladoByCompaniaVuelo(FormularioPendienteFiltro filtro) {
-        filtro.setEscolta(false);
+    public Set<FormularioPendienteView> getCountFormularioTrasladoByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         return service.getCountFormularioByCompaniaVuelo(filtro);
     }
 }

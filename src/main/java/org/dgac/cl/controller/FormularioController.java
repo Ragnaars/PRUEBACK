@@ -116,7 +116,7 @@ public class FormularioController {
     }
 
     @GetMapping("/trasladoCount")
-    public ResponseEntity<?> trasladoEscolta(@RequestParam(required = false) Integer companiaAerea, @RequestParam(required = false) Integer numeroVuelo) {
+    public ResponseEntity<?> trasladoCount(@RequestParam(required = false) Integer companiaAerea, @RequestParam(required = false) Integer numeroVuelo) {
         return ResponseEntity.ok(negocio.getCountFormularioTrasladoByCompaniaVuelo(
                 FormularioPendienteFiltro.builder().companiaAerea(companiaAerea).numeroVuelo(numeroVuelo).build()));
     }

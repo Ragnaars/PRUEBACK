@@ -44,5 +44,8 @@ public class PuenteEmbarque {
     @Column(name="ptem_habilitado")
     private Boolean habilitado;
     
-
+    public PuenteEmbarque(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
 }

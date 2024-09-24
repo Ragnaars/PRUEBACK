@@ -7,17 +7,18 @@ import org.dgac.cl.model.entity.PuenteEmbarque;
 import lombok.Data;
 
 @Data
-public class FormularioPendiente {
+public class FormularioPendienteView {
     private Long idFormulario;
     private LocalDateTime fechaHoraVuelo;
     private CompaniaVuelo companiaVuelo;
     private Boolean requiereEscolta;
     private Long totalTickets;
-    private PuenteEmbarque puenteEmbarque;
+    private PuenteEmbarqueView puenteEmbarque;
     private String origen;
     private String destino;
+    private TrasladoPendienteView traslado;
     
-    public FormularioPendiente(LocalDateTime fechaHoraVuelo, CompaniaVuelo companiaVuelo, Boolean requiereEscolta, Long totalTickets, PuenteEmbarque puenteEmbarque, String origen, String destino) {
+    public FormularioPendienteView(LocalDateTime fechaHoraVuelo, CompaniaVuelo companiaVuelo, Boolean requiereEscolta, Long totalTickets, PuenteEmbarqueView puenteEmbarque, String origen, String destino, TrasladoPendienteView traslado) {
         this.fechaHoraVuelo = fechaHoraVuelo;
         this.companiaVuelo = companiaVuelo;
         this.requiereEscolta = requiereEscolta;
@@ -25,10 +26,11 @@ public class FormularioPendiente {
         this.puenteEmbarque = puenteEmbarque;
         this.origen = origen;
         this.destino = destino;
+        this.traslado = traslado;
     }
 
-    public FormularioPendiente(Long idFormulario, LocalDateTime fechaHoraVuelo, CompaniaVuelo companiaVuelo,
-            Boolean requiereEscolta, PuenteEmbarque puenteEmbarque, String origen, String destino) {
+    public FormularioPendienteView(Long idFormulario, LocalDateTime fechaHoraVuelo, CompaniaVuelo companiaVuelo,
+            Boolean requiereEscolta, PuenteEmbarqueView puenteEmbarque, String origen, String destino) {
         this.idFormulario = idFormulario;
         this.fechaHoraVuelo = fechaHoraVuelo;
         this.companiaVuelo = companiaVuelo;

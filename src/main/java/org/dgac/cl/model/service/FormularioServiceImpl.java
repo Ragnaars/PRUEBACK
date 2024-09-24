@@ -12,7 +12,7 @@ import org.dgac.cl.model.dao.FormularioDAO;
 import org.dgac.cl.model.dto.FormularioPendienteFiltro;
 import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.Formulario;
-import org.dgac.cl.model.view.FormularioPendiente;
+import org.dgac.cl.model.view.FormularioPendienteView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,19 +32,19 @@ public class FormularioServiceImpl implements FormularioService {
     }
 
     @Override
-    public Set<FormularioPendiente> getCountFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+    public Set<FormularioPendienteView> getCountFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         
         return dao.getCountFormularioTrasladoByCompaniaVuelo(filtro.getCompaniaAerea(), filtro.getNumeroVuelo(), filtro.getPuenteEmbarque());
     }
 
     @Override
-    public Set<FormularioPendiente> getFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+    public Set<FormularioPendienteView> getFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         
         return dao.getFormularioPendienteByCompaniaVuelo(null, null);
     }
 
     @Override
-    public Set<FormularioPendiente> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+    public Set<FormularioPendienteView> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         
         //ZoneId defaultZoneId = ZoneId.systemDefault();
         //Date fechaDesde = Date.from(filtro.getFechaDesde().atStartOfDay(defaultZoneId).toInstant());
@@ -83,7 +83,7 @@ public class FormularioServiceImpl implements FormularioService {
     }
 
     @Override
-    public Set<FormularioPendiente> getFormularioPendienteByCompaniaVuelo(Boolean escolta, CompaniaVuelo companiaVuelo) {
+    public Set<FormularioPendienteView> getFormularioPendienteByCompaniaVuelo(Boolean escolta, CompaniaVuelo companiaVuelo) {
         
         return dao.getFormularioPendienteByCompaniaVuelo(escolta, companiaVuelo);
     }

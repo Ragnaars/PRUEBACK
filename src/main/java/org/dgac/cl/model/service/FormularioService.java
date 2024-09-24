@@ -6,7 +6,7 @@ import java.util.Set;
 import org.dgac.cl.model.dto.FormularioPendienteFiltro;
 import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.Formulario;
-import org.dgac.cl.model.view.FormularioPendiente;
+import org.dgac.cl.model.view.FormularioPendienteView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -18,8 +18,8 @@ public interface FormularioService {
     public Formulario findById(Long id);
     public Formulario save(Formulario formulario);
     public void deleteById(Long id);
-    public Set<FormularioPendiente> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro);
-    public Set<FormularioPendiente> getFormularioPendienteByCompaniaVuelo(Boolean escolta, CompaniaVuelo companiaVuelo);
-    public Set<FormularioPendiente> getCountFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro);
-    public Set<FormularioPendiente> getFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro);
+    public Set<FormularioPendienteView> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro);
+    public Set<FormularioPendienteView> getFormularioPendienteByCompaniaVuelo(Boolean escolta, CompaniaVuelo companiaVuelo);
+    public Set<FormularioPendienteView> getCountFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro);
+    public Set<FormularioPendienteView> getFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro);
 }
