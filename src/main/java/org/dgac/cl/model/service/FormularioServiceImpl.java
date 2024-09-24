@@ -1,10 +1,4 @@
 package org.dgac.cl.model.service;
-
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +28,7 @@ public class FormularioServiceImpl implements FormularioService {
     @Override
     public Set<FormularioPendienteView> getCountFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         
-        return dao.getCountFormularioTrasladoByCompaniaVuelo(filtro.getCompaniaAerea(), filtro.getNumeroVuelo(), filtro.getPuenteEmbarque());
+        return dao.getCountFormularioByCompaniaVuelo(filtro.getCompaniaAerea(), filtro.getNumeroVuelo(), filtro.getPuenteEmbarque());
     }
 
     @Override
@@ -46,19 +40,7 @@ public class FormularioServiceImpl implements FormularioService {
     @Override
     public Set<FormularioPendienteView> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro) {
         
-        //ZoneId defaultZoneId = ZoneId.systemDefault();
-        //Date fechaDesde = Date.from(filtro.getFechaDesde().atStartOfDay(defaultZoneId).toInstant());
-        //Date fechaHasta = filtro.getFechaHasta() != null? Date.from(filtro.getFechaHasta().atStartOfDay(defaultZoneId).toInstant()) : null;
-
-        
-        /*
-        Timestamp fechaDesde = Timestamp.valueOf(filtro.getFechaDesde().atStartOfDay());
-        Timestamp fechaHasta = Timestamp.valueOf(filtro.getFechaHasta().atStartOfDay());
-        * return dao.getCountFormularioPendienteByCompaniaVuelo(filtro.getEscolta(), filtro.getCompaniaAerea(),
-            filtro.getNumeroVuelo(), filtro.getPuenteEmbarque(), filtro.getFechaDesde(), filtro.getFechaHasta());
-         */
-
-        return dao.getCountFormularioPendienteByCompaniaVuelo(filtro.getEscolta(), filtro.getCompaniaAerea(),
+        return dao.getCountFormularioPendienteByCompaniaVuelo(filtro.getCompaniaAerea(),
             filtro.getNumeroVuelo(), filtro.getPuenteEmbarque());
     }
 

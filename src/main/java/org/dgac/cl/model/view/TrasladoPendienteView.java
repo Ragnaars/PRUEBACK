@@ -14,5 +14,4 @@ import lombok.NoArgsConstructor;
 public class TrasladoPendienteView {
     private Integer id;
     private EstadoFormulario estadoTraslado;
-    
 }

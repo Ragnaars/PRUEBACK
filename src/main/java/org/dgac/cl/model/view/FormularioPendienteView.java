@@ -2,7 +2,6 @@ package org.dgac.cl.model.view;
 
 import java.time.LocalDateTime;
 import org.dgac.cl.model.entity.CompaniaVuelo;
-import org.dgac.cl.model.entity.PuenteEmbarque;
 
 import lombok.Data;
 

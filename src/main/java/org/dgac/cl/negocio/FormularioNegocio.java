@@ -1,5 +1,7 @@
 package org.dgac.cl.negocio;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -124,6 +126,9 @@ public class FormularioNegocio {
     }
 
     public Set<FormularioPendienteView> getCountFormularioTrasladoByCompaniaVuelo(FormularioPendienteFiltro filtro) {
-        return service.getCountFormularioByCompaniaVuelo(filtro);
+        Set<FormularioPendienteView> result = new HashSet<>();
+        result = service.getCountFormularioByCompaniaVuelo(filtro);
+        result.addAll(service.getCountFormularioPendienteByCompaniaVuelo(filtro));
+        return result;
     }
 }

@@ -83,40 +83,10 @@ public class FormularioController {
         return ResponseEntity.ok(negocio.registroFase1(formulario));
     }
 
-    @GetMapping("/pendienteCountNoEscolta")
-    public ResponseEntity<?> pendienteCountNoEscolta(
-            @RequestParam(required = false) Integer companiaAerea,
-            @RequestParam(required = false) Integer numeroVuelo,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate fechaDesde,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate fechaHasta) {
-        return ResponseEntity.ok(negocio.getCountFormularioPendienteNoEscoltaByCompaniaVuelo(
-                FormularioPendienteFiltro.builder().companiaAerea(companiaAerea).numeroVuelo(numeroVuelo)
-                        .fechaDesde(fechaDesde).fechaHasta(fechaHasta).build()));
-    }
-
-    @GetMapping("/pendienteCountEscolta")
-    public ResponseEntity<?> pendienteCountEscolta(@RequestParam(required = false) Integer companiaAerea,
-            @RequestParam(required = false) Integer numeroVuelo,
-            @RequestParam(required = false) LocalDate fechaDesde,
-            @RequestParam(required = false) LocalDate fechaHasta) {
-        return ResponseEntity.ok(negocio.getCountFormularioPendienteEscoltaByCompaniaVuelo(
-                FormularioPendienteFiltro.builder().companiaAerea(companiaAerea).numeroVuelo(numeroVuelo)
-                        .fechaDesde(fechaDesde).fechaHasta(fechaHasta).build()));
-    }
-
-    @GetMapping("/pendienteEscolta")
-    public ResponseEntity<?> pendienteEscolta(@RequestParam Integer companiaAerea, @RequestParam Integer numeroVuelo) {
-        return ResponseEntity.ok(negocio.getFormularioPendienteEscoltaByCompaniaVuelo(companiaAerea, numeroVuelo));
-    }
-
-    @GetMapping("/pendienteNoEscolta")
-    public ResponseEntity<?> pendienteNoEscolta(@RequestParam Integer companiaAerea,
-            @RequestParam Integer numeroVuelo) {
-        return ResponseEntity.ok(negocio.getFormularioPendienteNoEscoltaByCompaniaVuelo(companiaAerea, numeroVuelo));
-    }
-
     @GetMapping("/trasladoCount")
-    public ResponseEntity<?> trasladoCount(@RequestParam(required = false) Integer companiaAerea, @RequestParam(required = false) Integer numeroVuelo) {
+    public ResponseEntity<?> trasladoCount(
+            @RequestParam(required = false) Integer companiaAerea,
+            @RequestParam(required = false) Integer numeroVuelo) {
         return ResponseEntity.ok(negocio.getCountFormularioTrasladoByCompaniaVuelo(
                 FormularioPendienteFiltro.builder().companiaAerea(companiaAerea).numeroVuelo(numeroVuelo).build()));
     }

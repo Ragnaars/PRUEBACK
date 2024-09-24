@@ -1,8 +1,5 @@
 package org.dgac.cl.model.dao;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 import org.dgac.cl.model.entity.CompaniaVuelo;
@@ -24,18 +21,16 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "f.fechaHoraVuelo, "
     + "f.companiaVuelo, "
     + "f.requiereEscolta, "
-    + "COUNT(f) OVER (PARTITION BY f.companiaVuelo), "
+    + "COUNT(f) OVER (PARTITION BY f.companiaVuelo, f.fechaHoraVuelo, f.puenteEmbarque, f.origen, f.destino), "
     + "new org.dgac.cl.model.view.PuenteEmbarqueView(f.puenteEmbarque.id, f.puenteEmbarque.nombre), "
     + "f.origen, "
     + "f.destino, "
-    + "new org.dgac.cl.model.view.TrasladoPendienteView(f.traslado.id, f.traslado.estadoTraslado)) FROM Formulario f WHERE " 
+    + "null) FROM Formulario f WHERE " 
     + "f.traslado is null " 
-    + "AND f.requiereEscolta = :escolta "
     + "AND (:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea)"
     + "AND (:numeroVuelo IS NULL OR f.companiaVuelo.numeroVuelo = :numeroVuelo)"
     + "AND (:puenteEmbarque IS NULL OR f.puenteEmbarque = :puenteEmbarque)")
     public Set<FormularioPendienteView> getCountFormularioPendienteByCompaniaVuelo(
-        @Param("escolta") Boolean escolta,
         @Param("companiaAerea") Integer companiaAerea,
         @Param("numeroVuelo") Integer numeroVuelo,
         @Param("puenteEmbarque") Integer puenteEmbarque);
@@ -57,15 +52,17 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "f.fechaHoraVuelo, "
     + "f.companiaVuelo, "
     + "f.requiereEscolta, "
-    + "COUNT(f) OVER (PARTITION BY f.companiaVuelo, f.fechaHoraVuelo, f.traslado), "
+    + "COUNT(f) OVER (PARTITION BY f.companiaVuelo, f.fechaHoraVuelo, f.traslado, f.puenteEmbarque, f.origen, f.destino), "
     + "new org.dgac.cl.model.view.PuenteEmbarqueView(f.puenteEmbarque.id, f.puenteEmbarque.nombre), "
     + "f.origen, "
     + "f.destino, "
-    + "new org.dgac.cl.model.view.TrasladoPendienteView(f.traslado.id, f.traslado.estadoTraslado)) FROM Formulario f WHERE " 
-    + "(:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea)"
+    + "new org.dgac.cl.model.view.TrasladoPendienteView(f.traslado.id, f.traslado.estadoTraslado)) FROM Formulario f "
+    + "WHERE " 
+    + "f.traslado IS NOT NULL " 
+    + "AND (:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea)"
     + "AND (:numeroVuelo IS NULL OR f.companiaVuelo.numeroVuelo = :numeroVuelo)"
     + "AND (:puenteEmbarque IS NULL OR f.puenteEmbarque = :puenteEmbarque)")
-    public Set<FormularioPendienteView> getCountFormularioTrasladoByCompaniaVuelo(
+    public Set<FormularioPendienteView> getCountFormularioByCompaniaVuelo(
         @Param("companiaAerea") Integer companiaAerea,
         @Param("numeroVuelo") Integer numeroVuelo,
         @Param("puenteEmbarque") Integer puenteEmbarque);
