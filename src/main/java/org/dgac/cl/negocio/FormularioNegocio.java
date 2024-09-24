@@ -107,28 +107,14 @@ public class FormularioNegocio {
         service.save(formulario);
     }
 
-    public Set<FormularioPendienteView> getCountFormularioPendienteNoEscoltaByCompaniaVuelo(FormularioPendienteFiltro filtro) {
-        filtro.setEscolta(false);
-        return service.getCountFormularioPendienteByCompaniaVuelo(filtro);
-    }
-
-    public Set<FormularioPendienteView> getCountFormularioPendienteEscoltaByCompaniaVuelo(FormularioPendienteFiltro filtro) {
-        filtro.setEscolta(true);
-        return service.getCountFormularioPendienteByCompaniaVuelo(filtro);
+    public Set<FormularioPendienteView> findFormulario(FormularioPendienteFiltro filtro) {
+        return service.findFormulario(filtro);
     }
     
-    public Set<FormularioPendienteView> getFormularioPendienteNoEscoltaByCompaniaVuelo(Integer companiaAerea, Integer numeroVuelo) {
-        return service.getFormularioPendienteByCompaniaVuelo(false, CompaniaVuelo.builder().numeroVuelo(numeroVuelo).companiaAerea(companiaAerea).build());
-    }
-
-    public Set<FormularioPendienteView> getFormularioPendienteEscoltaByCompaniaVuelo(Integer companiaAerea, Integer numeroVuelo) {
-        return service.getFormularioPendienteByCompaniaVuelo(true, CompaniaVuelo.builder().numeroVuelo(numeroVuelo).companiaAerea(companiaAerea).build());
-    }
-
-    public Set<FormularioPendienteView> getCountFormularioTrasladoByCompaniaVuelo(FormularioPendienteFiltro filtro) {
+    public Set<FormularioPendienteView> contabilizarFormularios(FormularioPendienteFiltro filtro) {
         Set<FormularioPendienteView> result = new HashSet<>();
-        result = service.getCountFormularioByCompaniaVuelo(filtro);
-        result.addAll(service.getCountFormularioPendienteByCompaniaVuelo(filtro));
+        result = service.getCountFormulario(filtro);
+        result.addAll(service.getCountFormularioPendiente(filtro));
         return result;
     }
 }

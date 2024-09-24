@@ -1,10 +1,10 @@
 package org.dgac.cl.model.service;
+
 import java.util.List;
 import java.util.Set;
 
 import org.dgac.cl.model.dao.FormularioDAO;
 import org.dgac.cl.model.dto.FormularioPendienteFiltro;
-import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.view.FormularioPendienteView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,30 +18,11 @@ public class FormularioServiceImpl implements FormularioService {
 
     @Autowired
     private FormularioDAO dao;
-    
+
     @Override
     public List<Formulario> findAllById(List<Long> ids) {
 
-       return dao.findAllById(ids);
-    }
-
-    @Override
-    public Set<FormularioPendienteView> getCountFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro) {
-        
-        return dao.getCountFormularioByCompaniaVuelo(filtro.getCompaniaAerea(), filtro.getNumeroVuelo(), filtro.getPuenteEmbarque());
-    }
-
-    @Override
-    public Set<FormularioPendienteView> getFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro) {
-        
-        return dao.getFormularioPendienteByCompaniaVuelo(null, null);
-    }
-
-    @Override
-    public Set<FormularioPendienteView> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro) {
-        
-        return dao.getCountFormularioPendienteByCompaniaVuelo(filtro.getCompaniaAerea(),
-            filtro.getNumeroVuelo(), filtro.getPuenteEmbarque());
+        return dao.findAllById(ids);
     }
 
     @Override
@@ -65,14 +46,27 @@ public class FormularioServiceImpl implements FormularioService {
     }
 
     @Override
-    public Set<FormularioPendienteView> getFormularioPendienteByCompaniaVuelo(Boolean escolta, CompaniaVuelo companiaVuelo) {
-        
-        return dao.getFormularioPendienteByCompaniaVuelo(escolta, companiaVuelo);
+    public void deleteById(Long id) {
+        dao.deleteById(id);
     }
 
     @Override
-    public void deleteById(Long id) {
-        dao.deleteById(id);
+    public Set<FormularioPendienteView> getCountFormulario(FormularioPendienteFiltro filtro) {
+
+        return dao.getCountFormulario(filtro.getCompaniaAerea(), filtro.getNumeroVuelo(), null);
+    }
+
+    @Override
+    public Set<FormularioPendienteView> getCountFormularioPendiente(FormularioPendienteFiltro filtro) {
+
+        return dao.getCountFormularioPendiente(filtro.getCompaniaAerea(), filtro.getNumeroVuelo(), null);
+    }
+
+    @Override
+    public Set<FormularioPendienteView> findFormulario(FormularioPendienteFiltro filtro) {
+
+        return dao.findFormulario(filtro.getTraslado(), filtro.getPuenteEmbarque(), filtro.getFechaHoraVuelo(), filtro.getOrigen(), filtro.getDestino(), filtro.getEscolta(), filtro.getCompaniaAerea(), filtro.getNumeroVuelo());
+
     }
 
 }

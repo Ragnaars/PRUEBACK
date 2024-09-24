@@ -18,8 +18,7 @@ public interface FormularioService {
     public Formulario findById(Long id);
     public Formulario save(Formulario formulario);
     public void deleteById(Long id);
-    public Set<FormularioPendienteView> getCountFormularioPendienteByCompaniaVuelo(FormularioPendienteFiltro filtro);
-    public Set<FormularioPendienteView> getFormularioPendienteByCompaniaVuelo(Boolean escolta, CompaniaVuelo companiaVuelo);
-    public Set<FormularioPendienteView> getCountFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro);
-    public Set<FormularioPendienteView> getFormularioByCompaniaVuelo(FormularioPendienteFiltro filtro);
+    public Set<FormularioPendienteView> getCountFormularioPendiente(FormularioPendienteFiltro filtro);
+    public Set<FormularioPendienteView> getCountFormulario(FormularioPendienteFiltro filtro);
+    public Set<FormularioPendienteView> findFormulario(FormularioPendienteFiltro filtro);
 }

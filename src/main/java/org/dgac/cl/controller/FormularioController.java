@@ -6,6 +6,7 @@ import org.dgac.cl.filter.FormularioFilter;
 import org.dgac.cl.model.dto.FormularioPendienteFiltro;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.negocio.FormularioNegocio;
+import org.hibernate.grammars.hql.HqlParser.LocalDateTimeContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/formulario")
@@ -87,7 +89,29 @@ public class FormularioController {
     public ResponseEntity<?> trasladoCount(
             @RequestParam(required = false) Integer companiaAerea,
             @RequestParam(required = false) Integer numeroVuelo) {
-        return ResponseEntity.ok(negocio.getCountFormularioTrasladoByCompaniaVuelo(
+        return ResponseEntity.ok(negocio.contabilizarFormularios(
                 FormularioPendienteFiltro.builder().companiaAerea(companiaAerea).numeroVuelo(numeroVuelo).build()));
+    }
+
+    @GetMapping("/trasladoDetalle")
+    public ResponseEntity<?> trasladoDetalle(
+            @RequestParam Integer companiaAerea,
+            @RequestParam Integer numeroVuelo,
+            @RequestParam Integer puenteEmbarque,
+            @RequestParam String origen,
+            @RequestParam String destino,
+            @RequestParam Integer traslado,
+            @RequestParam Boolean escolta,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime fechaHoraVuelo) {
+        return ResponseEntity.ok(negocio.findFormulario(
+                FormularioPendienteFiltro.builder()
+                .companiaAerea(companiaAerea)
+                .numeroVuelo(numeroVuelo)
+                .puenteEmbarque(puenteEmbarque)
+                .origen(origen)
+                .destino(destino)
+                .traslado(traslado)
+                .escolta(escolta)
+                .fechaHoraVuelo(fechaHoraVuelo).build()));
     }
 }

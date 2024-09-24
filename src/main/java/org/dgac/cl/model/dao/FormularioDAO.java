@@ -1,9 +1,11 @@
 package org.dgac.cl.model.dao;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.Formulario;
+import org.dgac.cl.model.entity.Traslado;
 import org.dgac.cl.model.view.FormularioPendienteView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -30,7 +32,7 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "AND (:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea)"
     + "AND (:numeroVuelo IS NULL OR f.companiaVuelo.numeroVuelo = :numeroVuelo)"
     + "AND (:puenteEmbarque IS NULL OR f.puenteEmbarque = :puenteEmbarque)")
-    public Set<FormularioPendienteView> getCountFormularioPendienteByCompaniaVuelo(
+    public Set<FormularioPendienteView> getCountFormularioPendiente(
         @Param("companiaAerea") Integer companiaAerea,
         @Param("numeroVuelo") Integer numeroVuelo,
         @Param("puenteEmbarque") Integer puenteEmbarque);
@@ -43,8 +45,24 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "f.requiereEscolta, "
     + "new org.dgac.cl.model.view.PuenteEmbarqueView(f.puenteEmbarque.id, f.puenteEmbarque.nombre), "
     + "f.origen, " 
-    + "f.destino) FROM Formulario f WHERE f.traslado is null AND f.requiereEscolta = :escolta and f.companiaVuelo = :companiaVuelo")
-    public Set<FormularioPendienteView> getFormularioPendienteByCompaniaVuelo(@Param("escolta") Boolean escolta, @Param("companiaVuelo") CompaniaVuelo companiaVuelo);
+    + "f.destino) FROM Formulario f WHERE "
+    + "f.traslado.id = :traslado " 
+    + "AND f.puenteEmbarque.id = :puenteEmbarque "
+    + "AND f.fechaHoraVuelo = :fechaHoraVuelo "
+    + "AND f.origen = :origen "
+    + "AND f.destino = :destino "
+    + "AND f.requiereEscolta = :escolta " 
+    + "AND f.companiaVuelo.companiaAerea = :companiaAerea " 
+    + "AND f.companiaVuelo.numeroVuelo = :numeroVuelo")
+    public Set<FormularioPendienteView> findFormulario(
+        @Param("traslado") Integer traslado,
+        @Param("puenteEmbarque") Integer puenteEmbarque,
+        @Param("fechaHoraVuelo") LocalDateTime fechaHoraVuelo,
+        @Param("origen") String origen,
+        @Param("destino") String destino,
+        @Param("escolta") Boolean escolta, 
+        @Param("companiaAerea") Integer companiaVuelo,
+        @Param("numeroVuelo") Integer numeroVuelo);
 
     // formularios asignados a traslado
 
@@ -62,7 +80,7 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "AND (:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea)"
     + "AND (:numeroVuelo IS NULL OR f.companiaVuelo.numeroVuelo = :numeroVuelo)"
     + "AND (:puenteEmbarque IS NULL OR f.puenteEmbarque = :puenteEmbarque)")
-    public Set<FormularioPendienteView> getCountFormularioByCompaniaVuelo(
+    public Set<FormularioPendienteView> getCountFormulario(
         @Param("companiaAerea") Integer companiaAerea,
         @Param("numeroVuelo") Integer numeroVuelo,
         @Param("puenteEmbarque") Integer puenteEmbarque);
