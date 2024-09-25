@@ -29,7 +29,7 @@ public class FormularioPendienteView {
     }
 
     public FormularioPendienteView(Long idFormulario, LocalDateTime fechaHoraVuelo, CompaniaVuelo companiaVuelo,
-            Boolean requiereEscolta, PuenteEmbarqueView puenteEmbarque, String origen, String destino) {
+            Boolean requiereEscolta, PuenteEmbarqueView puenteEmbarque, String origen, String destino, TrasladoPendienteView traslado) {
         this.idFormulario = idFormulario;
         this.fechaHoraVuelo = fechaHoraVuelo;
         this.companiaVuelo = companiaVuelo;
@@ -37,5 +37,6 @@ public class FormularioPendienteView {
         this.puenteEmbarque = puenteEmbarque;
         this.origen = origen;
         this.destino = destino;
+        this.traslado = traslado;
     }
 }

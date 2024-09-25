@@ -45,7 +45,8 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "f.requiereEscolta, "
     + "new org.dgac.cl.model.view.PuenteEmbarqueView(f.puenteEmbarque.id, f.puenteEmbarque.nombre), "
     + "f.origen, " 
-    + "f.destino) FROM Formulario f WHERE "
+    + "f.destino, "
+    + "null) FROM Formulario f WHERE "
     + "f.traslado is null " 
     + "AND f.puenteEmbarque.id = :puenteEmbarque "
     + "AND f.fechaHoraVuelo = :fechaHoraVuelo "
@@ -71,7 +72,8 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "f.requiereEscolta, "
     + "new org.dgac.cl.model.view.PuenteEmbarqueView(f.puenteEmbarque.id, f.puenteEmbarque.nombre), "
     + "f.origen, " 
-    + "f.destino) FROM Formulario f WHERE "
+    + "f.destino, "
+    + "new org.dgac.cl.model.view.TrasladoPendienteView(f.traslado.id, f.traslado.estadoTraslado)) FROM Formulario f WHERE "
     + "f.traslado.id = :traslado")
     public Set<FormularioPendienteView> findFormularioByTraslado(
         @Param("traslado") Integer traslado);
