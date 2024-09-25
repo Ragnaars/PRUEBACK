@@ -1,6 +1,7 @@
 package org.dgac.cl.controller;
 
 import org.dgac.cl.model.dto.TrasladoEscoltaRegistroDTO;
+import org.dgac.cl.model.dto.TrasladoFinalizarDTO;
 import org.dgac.cl.model.dto.TrasladoNoEscoltaRegistroDTO;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.entity.Traslado;
@@ -49,4 +50,8 @@ public class TrasladoController {
         return ResponseEntity.ok(negocio.registroTrasladoEscolta(formulario));
     }
 
+    @PostMapping("/finalizarTrasladoEscolta")
+    public ResponseEntity<?> finalizarTrasladoEscolta(@RequestBody TrasladoFinalizarDTO formulario) throws Exception {
+        return ResponseEntity.ok(negocio.finalizarTrasladoEscolta(formulario));
+    }
 }

@@ -19,7 +19,7 @@ public class TrasladoEscoltaRegistroDTO {
     private Boolean avsecTicaProvisorio;
     private String avsecEvidencia;
     private String avsecTurno;
-    private String horaInicioEscolta;
+    private LocalTime horaInicioEscolta;
     private Integer puenteEmbarque;
     private LocalDateTime fechaHora;
     private LocalTime horaVuelo;

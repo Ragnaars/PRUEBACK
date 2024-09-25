@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dgac.cl.constantes.ConstantesEstadoTraslado;
 import org.dgac.cl.model.dto.TrasladoEscoltaRegistroDTO;
+import org.dgac.cl.model.dto.TrasladoFinalizarDTO;
 import org.dgac.cl.model.dto.TrasladoNoEscoltaRegistroDTO;
 import org.dgac.cl.model.entity.EstadoFormulario;
 import org.dgac.cl.model.entity.Formulario;
@@ -72,7 +73,7 @@ public class TrasladoNegocio {
 
         List<Formulario> formularios = formularioService.findAllById(trasladoRegistro.getFormularios());
 
-        // valdiar formularios
+        // validar formularios
         if(formularios.isEmpty()) {
             throw new Exception("No se encontraron formularios asociados al traslado");
         }
@@ -104,5 +105,41 @@ public class TrasladoNegocio {
 
         // retornar objeto
         return trasladoFinal;
+    }
+
+    public Traslado finalizarTrasladoEscolta(TrasladoFinalizarDTO trasladoFinalizar) throws Exception {
+
+        Traslado traslado = trasladoService.findById(trasladoFinalizar.getId());
+
+        // validar formularios
+        if(traslado == null) {
+            throw new Exception("No se encontró traslado especificado");
+        }
+
+        // registrar traslado
+        traslado.setUsroCompTica(trasladoFinalizar.getUsroCompTica());
+        traslado.setUsroCompTicaProvisorio(trasladoFinalizar.getUsroCompTicaProvisorio());
+        traslado.setUsroCompEvidencia(trasladoFinalizar.getUsroCompEvidencia());
+        traslado.setReceptorZZTica(trasladoFinalizar.getReceptorZZTica());
+        traslado.setReceptorZZTicaProvisorio(trasladoFinalizar.getReceptorZZTicaProvisorio());
+        traslado.setReceptorZZEvidencia(trasladoFinalizar.getReceptorZZEvidencia());
+        traslado.setCotTica(trasladoFinalizar.getCotTica());
+        traslado.setCotTicaProvisorio(trasladoFinalizar.getCotTicaProvisorio());
+        traslado.setCotEvidencia(trasladoFinalizar.getCotEvidencia());
+        traslado.setBodegaTica(trasladoFinalizar.getBodegaTica());
+        traslado.setBodegaTicaProvisorio(trasladoFinalizar.getBodegaTicaProvisorio());
+        traslado.setBodegaEvidencia(trasladoFinalizar.getBodegaEvidencia());
+        traslado.setHoraLlegadaPuenteEmbarque(trasladoFinalizar.getHoraLlegadaPuenteEmbarque());
+        traslado.setHoraFinEscolta(trasladoFinalizar.getHoraFinEscolta());
+        traslado.setMatriculaAeronave(trasladoFinalizar.getMatriculaAeronave());
+        traslado.setObservacion(trasladoFinalizar.getObervacion());
+        traslado.setEstadoTraslado(EstadoFormulario.builder().id(ConstantesEstadoTraslado.ENTRAGADO_ZZ).build());
+        traslado = trasladoService.save(traslado);
+        // adjuntar evidencias repositorio
+
+        // notificar
+
+        // retornar objeto
+        return traslado;
     }
 }

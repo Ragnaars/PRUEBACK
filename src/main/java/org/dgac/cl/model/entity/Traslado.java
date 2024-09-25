@@ -2,6 +2,7 @@ package org.dgac.cl.model.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -63,13 +64,13 @@ public class Traslado {
     private PuenteEmbarque puenteEmbarque;
 
     @Column(name = "trsd_hora_inicio_escolta")
-    private String horaInicioEscolta;
+    private LocalTime horaInicioEscolta;
 
     @Column(name = "trsd_hora_fin_escolta")
-    private String horaFinEscolta;
+    private LocalTime horaFinEscolta;
 
     @Column(name = "trsd_hora_llegada_puente_embarque")
-    private String horaLlegadaPuenteEmbarque;
+    private LocalTime horaLlegadaPuenteEmbarque;
     
     @Column(name = "trsd_matricula_aeronave")
     private String matriculaAeronave;
