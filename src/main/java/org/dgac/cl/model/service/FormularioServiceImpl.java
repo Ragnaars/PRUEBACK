@@ -63,9 +63,15 @@ public class FormularioServiceImpl implements FormularioService {
     }
 
     @Override
+    public Set<FormularioPendienteView> findFormularioByTraslado(Integer traslado) {
+        
+        return dao.findFormularioByTraslado(traslado);
+    }
+
+    @Override
     public Set<FormularioPendienteView> findFormulario(FormularioPendienteFiltro filtro) {
 
-        return dao.findFormulario(filtro.getTraslado(), filtro.getPuenteEmbarque(), filtro.getFechaHoraVuelo(), filtro.getOrigen(), filtro.getDestino(), filtro.getEscolta(), filtro.getCompaniaAerea(), filtro.getNumeroVuelo());
+        return dao.findFormulario(filtro.getPuenteEmbarque(), filtro.getFechaHoraVuelo(), filtro.getOrigen(), filtro.getDestino(), filtro.getEscolta(), filtro.getCompaniaAerea(), filtro.getNumeroVuelo());
 
     }
 

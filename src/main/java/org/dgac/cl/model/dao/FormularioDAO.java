@@ -16,7 +16,7 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     
     /*
      * + "AND (:fechaDesde IS NULL OR CAST(f.fechaHoraVuelo AS java.time.LocalDate) >= :fechaDesde)"
-    + "AND (:fechaHasta IS NULL OR CAST(f.fechaHoraVuelo AS java.time.LocalDate) <= :fechaHasta)")
+        + "AND (:fechaHasta IS NULL OR CAST(f.fechaHoraVuelo AS java.time.LocalDate) <= :fechaHasta)")
      */
     // formularios pendientes agrupados
     @Query("SELECT new org.dgac.cl.model.view.FormularioPendienteView(" 
@@ -46,7 +46,7 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "new org.dgac.cl.model.view.PuenteEmbarqueView(f.puenteEmbarque.id, f.puenteEmbarque.nombre), "
     + "f.origen, " 
     + "f.destino) FROM Formulario f WHERE "
-    + "f.traslado.id = :traslado " 
+    + "f.traslado is null " 
     + "AND f.puenteEmbarque.id = :puenteEmbarque "
     + "AND f.fechaHoraVuelo = :fechaHoraVuelo "
     + "AND f.origen = :origen "
@@ -55,7 +55,6 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
     + "AND f.companiaVuelo.companiaAerea = :companiaAerea " 
     + "AND f.companiaVuelo.numeroVuelo = :numeroVuelo")
     public Set<FormularioPendienteView> findFormulario(
-        @Param("traslado") Integer traslado,
         @Param("puenteEmbarque") Integer puenteEmbarque,
         @Param("fechaHoraVuelo") LocalDateTime fechaHoraVuelo,
         @Param("origen") String origen,
@@ -63,6 +62,19 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
         @Param("escolta") Boolean escolta, 
         @Param("companiaAerea") Integer companiaVuelo,
         @Param("numeroVuelo") Integer numeroVuelo);
+
+    // formularios pendientes no agrupados con detalle de formulario
+    @Query("SELECT new org.dgac.cl.model.view.FormularioPendienteView("
+    + "f.id, "
+    + "f.fechaHoraVuelo, "
+    + "f.companiaVuelo, "
+    + "f.requiereEscolta, "
+    + "new org.dgac.cl.model.view.PuenteEmbarqueView(f.puenteEmbarque.id, f.puenteEmbarque.nombre), "
+    + "f.origen, " 
+    + "f.destino) FROM Formulario f WHERE "
+    + "f.traslado.id = :traslado")
+    public Set<FormularioPendienteView> findFormularioByTraslado(
+        @Param("traslado") Integer traslado);
 
     // formularios asignados a traslado
 

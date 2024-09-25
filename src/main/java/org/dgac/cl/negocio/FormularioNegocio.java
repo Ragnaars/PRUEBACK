@@ -111,6 +111,10 @@ public class FormularioNegocio {
         return service.findFormulario(filtro);
     }
     
+    public Set<FormularioPendienteView> findFormularioByTraslado(Integer traslado) {
+        return service.findFormularioByTraslado(traslado);
+    }
+
     public Set<FormularioPendienteView> contabilizarFormularios(FormularioPendienteFiltro filtro) {
         Set<FormularioPendienteView> result = new HashSet<>();
         result = service.getCountFormulario(filtro);

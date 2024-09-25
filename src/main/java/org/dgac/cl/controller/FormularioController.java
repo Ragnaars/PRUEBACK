@@ -100,7 +100,6 @@ public class FormularioController {
             @RequestParam Integer puenteEmbarque,
             @RequestParam String origen,
             @RequestParam String destino,
-            @RequestParam Integer traslado,
             @RequestParam Boolean escolta,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime fechaHoraVuelo) {
         return ResponseEntity.ok(negocio.findFormulario(
@@ -110,8 +109,13 @@ public class FormularioController {
                 .puenteEmbarque(puenteEmbarque)
                 .origen(origen)
                 .destino(destino)
-                .traslado(traslado)
                 .escolta(escolta)
                 .fechaHoraVuelo(fechaHoraVuelo).build()));
+    }
+
+    @GetMapping("/trasladoDetalle/{traslado}")
+    public ResponseEntity<?> trasladoDetalle(
+          @PathVariable Integer traslado) {
+        return ResponseEntity.ok(negocio.findFormularioByTraslado(traslado));
     }
 }

@@ -21,4 +21,5 @@ public interface FormularioService {
     public Set<FormularioPendienteView> getCountFormularioPendiente(FormularioPendienteFiltro filtro);
     public Set<FormularioPendienteView> getCountFormulario(FormularioPendienteFiltro filtro);
     public Set<FormularioPendienteView> findFormulario(FormularioPendienteFiltro filtro);
+    public Set<FormularioPendienteView> findFormularioByTraslado(Integer traslado);
 }
