@@ -136,7 +136,7 @@ public class TrasladoNegocio {
         traslado.setHoraLlegadaPuenteEmbarque(trasladoFinalizar.getHoraLlegadaPuenteEmbarque());
         traslado.setHoraFinEscolta(trasladoFinalizar.getHoraFinEscolta());
         traslado.setMatriculaAeronave(trasladoFinalizar.getMatriculaAeronave());
-        traslado.setObservacion(trasladoFinalizar.getObervacion());
+        traslado.setObservacion(trasladoFinalizar.getObservacion());
         traslado.setEstadoTraslado(EstadoFormulario.builder().id(ConstantesEstadoTraslado.ENTRAGADO_ZZ).build());
         traslado = trasladoService.save(traslado);
         // adjuntar evidencias repositorio

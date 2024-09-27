@@ -36,6 +36,6 @@ public class TrasladoFinalizarDTO {
     private LocalTime horaLlegadaPuenteEmbarque;
     private LocalTime horaFinEscolta;
     private String matriculaAeronave;
-    private String obervacion;
+    private String observacion;
     private List<String> evidencias;
 }
