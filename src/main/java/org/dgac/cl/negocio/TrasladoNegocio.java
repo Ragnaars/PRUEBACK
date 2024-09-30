@@ -43,6 +43,12 @@ public class TrasladoNegocio {
                 .usroCompTica(trasladoRegistro.getUsroCompTica())
                 .usroCompTicaProvisorio(trasladoRegistro.getUsroCompTicaProvisorio())
                 .usroCompEvidencia(trasladoRegistro.getUsroCompEvidencia())
+
+                .avsecNombre(trasladoRegistro.getAvsecNombre())
+                .avsecTica(trasladoRegistro.getAvsecTica())
+                .avsecTicaProvisorio(trasladoRegistro.getAvsecTicaProvisorio())
+                .avsecEvidencia(trasladoRegistro.getAvsecEvidencia())
+
                 //.fechaHora(trasladoRegistro.getFechaHora())
                 .requiereEscolta(false)
                 .estadoTraslado(EstadoFormulario.builder().id(ConstantesEstadoTraslado.ENTREGADO).build())

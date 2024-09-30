@@ -19,6 +19,12 @@ public class TrasladoNoEscoltaRegistroDTO {
     private Boolean usroCompTicaProvisorio;
     private String usroCompEvidencia;
     private String usroCompNombre;
+
+    private String avsecTica;
+    private Boolean avsecTicaProvisorio;
+    private String avsecEvidencia;
+    private String avsecNombre;
+    
     private LocalDateTime fechaHora;
     private LocalTime horaVuelo;
 }
