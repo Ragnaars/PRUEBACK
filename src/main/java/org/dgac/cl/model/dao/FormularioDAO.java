@@ -3,9 +3,7 @@ package org.dgac.cl.model.dao;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.Formulario;
-import org.dgac.cl.model.entity.Traslado;
 import org.dgac.cl.model.view.FormularioPendienteView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
