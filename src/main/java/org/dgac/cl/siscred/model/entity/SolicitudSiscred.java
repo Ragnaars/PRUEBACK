@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -28,13 +29,18 @@ public class SolicitudSiscred {
     private Integer id;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="sltd_idusuario", referencedColumnName="usro_id")
+    @JoinColumn(name="sltd_idusuario")
     private UsuarioSiscred usuario;
 
     @Column(name = "sltd_fingreso")
     private LocalDateTime fechaIngreso;
 
     @Column(name = "sltd_ntica")
-    private Integer nTica;
+    private Integer ntica;
     
+    @Column(name = "sltd_fvencimiento")
+    private LocalDate fechaVencimiento;
+
+    @Column(name = "sltd_estado")
+    private Integer estado;
 }

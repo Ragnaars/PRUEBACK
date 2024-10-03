@@ -38,6 +38,12 @@ public class SolicitudSiscredServiceImpl implements SolicitudSiscredService {
         return dao.save(solicitudSiscred);
     }
 
+    @Override
+    public SolicitudSiscred findByNtica(Integer id) {
+
+        return dao.findByNtica(id);
+    }
+
  
     
     
