@@ -1,7 +1,9 @@
-package org.dgac.cl.modelSiscred.entity;
+package org.dgac.cl.siscred.model.entity;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 public class UsuarioSiscred {
 
     @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @Column(name = "usro_id")
     private Integer id;
 
@@ -27,5 +30,6 @@ public class UsuarioSiscred {
 
     @Column(name = "usro_amaterno")
     private String apellidoMaterno;
+
 
 }

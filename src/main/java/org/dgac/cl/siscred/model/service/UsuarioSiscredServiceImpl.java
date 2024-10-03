@@ -1,9 +1,9 @@
-package org.dgac.cl.modelSiscred.service;
+package org.dgac.cl.siscred.model.service;
 
 import java.util.List;
 
-import org.dgac.cl.modelSiscred.dao.UsuarioSiscredDAO;
-import org.dgac.cl.modelSiscred.entity.UsuarioSiscred;
+import org.dgac.cl.siscred.model.dao.UsuarioSiscredDAO;
+import org.dgac.cl.siscred.model.entity.UsuarioSiscred;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

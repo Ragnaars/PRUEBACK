@@ -1,9 +1,9 @@
-package org.dgac.cl.modelSiscred.service;
+package org.dgac.cl.siscred.model.service;
 
 import java.util.List;
 
-import org.dgac.cl.modelSiscred.dao.SolicitudSiscredDAO;
-import org.dgac.cl.modelSiscred.entity.SolicitudSiscred;
+import org.dgac.cl.siscred.model.dao.SolicitudSiscredDAO;
+import org.dgac.cl.siscred.model.entity.SolicitudSiscred;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +38,7 @@ public class SolicitudSiscredServiceImpl implements SolicitudSiscredService {
         return dao.save(solicitudSiscred);
     }
 
+ 
     
     
 

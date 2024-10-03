@@ -1,8 +1,8 @@
-package org.dgac.cl.modelSiscred.service;
+package org.dgac.cl.siscred.model.service;
 
 import java.util.List;
 
-import org.dgac.cl.modelSiscred.entity.UsuarioSiscred;
+import org.dgac.cl.siscred.model.entity.UsuarioSiscred;
 
 public interface UsuarioSiscredService {
 

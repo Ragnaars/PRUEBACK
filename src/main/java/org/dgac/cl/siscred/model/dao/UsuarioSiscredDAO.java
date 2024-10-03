@@ -1,6 +1,6 @@
-package org.dgac.cl.modelSiscred.dao;
+package org.dgac.cl.siscred.model.dao;
 
-import org.dgac.cl.modelSiscred.entity.UsuarioSiscred;
+import org.dgac.cl.siscred.model.entity.UsuarioSiscred;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuarioSiscredDAO extends JpaRepository<UsuarioSiscred, Integer>  {

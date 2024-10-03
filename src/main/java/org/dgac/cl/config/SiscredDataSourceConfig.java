@@ -23,7 +23,7 @@ import jakarta.persistence.EntityManagerFactory;
 @Configuration //inyecta beans al contener de dependencias de spring
 @EnableTransactionManagement
 @EnableJpaRepositories(
-    basePackages = "org.dgac.cl.modelSiscred.dao", 
+    basePackages = "org.dgac.cl.siscred.model.dao", 
     entityManagerFactoryRef="siscredEntityManager", 
     transactionManagerRef="siscredTransactionManager"
     )
@@ -43,7 +43,7 @@ public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(@Qualifie
         new LocalContainerEntityManagerFactoryBean();
     localContainer.setDataSource(dataSource());
     localContainer.setPersistenceUnitName("siscred");
-    localContainer.setPackagesToScan("org.dgac.cl.modelSiscred.entity");
+    localContainer.setPackagesToScan("org.dgac.cl.siscred.model.entity");
 
     HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
     localContainer.setJpaVendorAdapter(vendorAdapter);

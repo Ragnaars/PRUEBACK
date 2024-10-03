@@ -62,10 +62,15 @@ public class AnesaDataSourceConfig {
         return localContainer;
     }
 
+    //Transaction Manager
+
     @Bean("anesaTransactionManager")
     @Primary
     public PlatformTransactionManager platformTransactionManager(
-        @Qualifier("anesaEntityManager") EntityManagerFactory entityManagerFactoryBean) {
+        @Qualifier("anesaEntityManager") 
+        EntityManagerFactory entityManagerFactoryBean) {
         return new JpaTransactionManager(entityManagerFactoryBean);
     }
+
+    
 }
