@@ -1,10 +1,10 @@
 package org.dgac.cl.model.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
 import org.dgac.cl.model.dto.FormularioPendienteFiltro;
-import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.view.FormularioPendienteView;
 import org.springframework.data.domain.Page;
@@ -22,4 +22,13 @@ public interface FormularioService {
     public Set<FormularioPendienteView> getCountFormulario(FormularioPendienteFiltro filtro);
     public Set<FormularioPendienteView> findFormulario(FormularioPendienteFiltro filtro);
     public Set<FormularioPendienteView> findFormularioByTraslado(Integer traslado);
+    public Set<Formulario> filtrarFormularios(
+        Integer companiaAerea, 
+        Integer numeroVuelo, 
+        Integer estadoTraslado, 
+        String origen, 
+        String destino, 
+        Boolean requiereEscolta, 
+        LocalDate fechaVuelo);
+
 }

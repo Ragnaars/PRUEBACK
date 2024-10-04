@@ -1,5 +1,6 @@
 package org.dgac.cl.model.dao;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -96,4 +97,30 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
         @Param("companiaAerea") Integer companiaAerea,
         @Param("numeroVuelo") Integer numeroVuelo,
         @Param("puenteEmbarque") Integer puenteEmbarque);
+
+@Query("SELECT f FROM Formulario f WHERE " +
+       "(:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea) AND " +
+       "(:numeroVuelo IS NULL OR f.companiaVuelo.numeroVuelo = :numeroVuelo) AND " +
+       "(f.traslado IS NULL OR :estadoTraslado IS NULL OR f.traslado.estadoTraslado.id = :estadoTraslado) AND " +
+       "(:origen IS NULL OR f.origen = :origen) AND " +
+       "(:destino IS NULL OR f.destino = :destino) AND " +
+       "(:requiereEscolta IS NULL OR f.requiereEscolta = :requiereEscolta) AND " +
+       "(:fechaVuelo IS NULL OR CAST(f.fechaHoraVuelo AS java.time.LocalDate) = :fechaVuelo)")
+public Set<Formulario> filtrarFormularios(
+        @Param("companiaAerea") Integer companiaAerea,
+        @Param("numeroVuelo") Integer numeroVuelo,
+        @Param("estadoTraslado") Integer estadoTraslado,
+        @Param("origen") String origen,
+        @Param("destino") String destino,
+        @Param("requiereEscolta") Boolean requiereEscolta,
+        @Param("fechaVuelo") LocalDate fechaVuelo    
+);
+
+
+
+
+
+    
+
 }
+

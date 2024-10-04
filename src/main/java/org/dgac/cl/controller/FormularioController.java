@@ -1,12 +1,13 @@
 package org.dgac.cl.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.dgac.cl.filter.FormularioFilter;
 import org.dgac.cl.model.dto.FormularioPendienteFiltro;
 import org.dgac.cl.model.entity.Formulario;
+import org.dgac.cl.model.service.FormularioService;
 import org.dgac.cl.negocio.FormularioNegocio;
-import org.hibernate.grammars.hql.HqlParser.LocalDateTimeContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/formulario")
@@ -29,6 +29,8 @@ public class FormularioController {
 
     @Autowired
     private FormularioNegocio negocio;
+    @Autowired
+    private FormularioService service;
 
     @GetMapping("/")
     public ResponseEntity<?> findAll() {
@@ -115,7 +117,27 @@ public class FormularioController {
 
     @GetMapping("/trasladoDetalle/{traslado}")
     public ResponseEntity<?> trasladoDetalle(
-          @PathVariable Integer traslado) {
+        @PathVariable Integer traslado) {
         return ResponseEntity.ok(negocio.findFormularioByTraslado(traslado));
     }
+
+    @GetMapping("/filtros")
+    public ResponseEntity<?> filtrarFormularios(
+        @RequestParam(required = false) Integer companiaAerea,
+        @RequestParam(required = false) Integer numeroVuelo,
+        @RequestParam(required = false) Integer estadoTraslado,
+        @RequestParam(required = false) String origen,
+        @RequestParam(required = false) String destino,
+        @RequestParam(required = false) Boolean requiereEscolta,
+        @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate fechaVuelo
+    ) {
+        System.out.println("Valor de estadoTraslado en el filtro: " + estadoTraslado);
+        return ResponseEntity.ok(
+            service.filtrarFormularios(companiaAerea, numeroVuelo, estadoTraslado,origen, destino,requiereEscolta, fechaVuelo)
+        );
+    }
+    
+
+  
+
 }

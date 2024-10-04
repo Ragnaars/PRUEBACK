@@ -11,6 +11,7 @@ public interface SolicitudSiscredService {
     public SolicitudSiscred findById(Integer id);
     public SolicitudSiscred save(SolicitudSiscred solicitudSiscred);
     public void deleteById(Integer id);
-    public SolicitudSiscred findByNtica(Integer id);
+    public List<SolicitudSiscred> findByNtica(Integer ntica);
+    public List<SolicitudSiscred> findByEstado();
     
 }

@@ -30,4 +30,9 @@ public class SolicitudSiscredController {
     public ResponseEntity<?> findByNtica(@PathVariable Integer id) {
         return ResponseEntity.ok(service.findByNtica(id));
     }
+
+    @GetMapping("/estado")
+    public ResponseEntity<?> findByEstado() {
+        return ResponseEntity.ok(service.findByEstado());
+    }
 }

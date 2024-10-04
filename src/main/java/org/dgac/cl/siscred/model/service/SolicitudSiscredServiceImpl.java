@@ -39,12 +39,17 @@ public class SolicitudSiscredServiceImpl implements SolicitudSiscredService {
     }
 
     @Override
-    public SolicitudSiscred findByNtica(Integer id) {
+    public List<SolicitudSiscred> findByNtica(Integer ntica) {
 
-        return dao.findByNtica(id);
+        return dao.findByNtica(ntica);
     }
 
- 
+    @Override
+    public List<SolicitudSiscred> findByEstado() {
+        return dao.findByEstado();
+    }
+
+
     
     
 
