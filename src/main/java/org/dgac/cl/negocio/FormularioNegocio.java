@@ -21,7 +21,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Component
@@ -120,5 +119,9 @@ public class FormularioNegocio {
         result = service.getCountFormulario(filtro);
         result.addAll(service.getCountFormularioPendiente(filtro));
         return result;
+    }
+
+    public List<Formulario> findByFiltro(FormularioFilter filter) {
+        return service.findAll(filter.generarFiltro());
     }
 }

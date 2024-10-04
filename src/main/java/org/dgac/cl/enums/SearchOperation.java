@@ -50,6 +50,8 @@ public enum SearchOperation {
 	
 	CHAIN_MATCH,
 	
-	NULL
+	NULL,
+
+	DATE_EQUAL
 }
 

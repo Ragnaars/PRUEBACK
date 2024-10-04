@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
@@ -114,8 +115,20 @@ public class GenericSpecification<T> implements Specification<T> {
 				case NULL ->  {
 					predicates.add(builder.isNull(root.get(criteria.getKey())));
 				}
+				
+				case DATE_EQUAL -> {
+					Expression<String> fechaFormateada = builder.function(
+						"TO_CHAR", 
+						String.class, 
+						root.get(criteria.getKey()), 
+						builder.literal("yyyy-mm-dd")
+					);
+
+					predicates.add(builder.equal(fechaFormateada, criteria.getValue().toString()));
+				}
 				default -> {
-                        }
+
+                }
 			}
 		}
 

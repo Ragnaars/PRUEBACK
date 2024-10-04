@@ -30,5 +30,6 @@ public interface FormularioService {
         String destino, 
         Boolean requiereEscolta, 
         LocalDate fechaVuelo);
-
+    public List<Formulario> findAll(Specification<Formulario> specification);
+        
 }

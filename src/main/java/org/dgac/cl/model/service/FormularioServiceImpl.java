@@ -81,4 +81,10 @@ public class FormularioServiceImpl implements FormularioService {
         return dao.filtrarFormularios(companiaAerea, numeroVuelo, estadoTraslado, origen, destino, requiereEscolta, fechaVuelo);
     }
 
+    @Override
+    public List<Formulario> findAll(Specification<Formulario> specification) {
+
+        return dao.findAll(specification);
+    }
+
 }

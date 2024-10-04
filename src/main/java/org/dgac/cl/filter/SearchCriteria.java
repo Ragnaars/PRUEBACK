@@ -5,8 +5,8 @@ import org.dgac.cl.enums.SearchOperation;
 import lombok.Data;
 
 @Data
-public class SearchCriteria {
 
+public class SearchCriteria {
     private String key;
 
     private String key2;
@@ -29,7 +29,7 @@ public class SearchCriteria {
         this.operation = operation;
     }
 
-    public SearchCriteria(String key, Object value, String key2, Object value2, SearchOperation operation){
+    public SearchCriteria(String key, String key2, Object value, Object value2, SearchOperation operation){
         super();
         this.key = key; 
         this.value = value;
@@ -38,6 +38,13 @@ public class SearchCriteria {
         this.operation = operation;
     }
 
+    public SearchCriteria(String key, String key2, Object value, SearchOperation operation){
+        super();
+        this.key = key; 
+        this.key2 = key2;
+        this.value = value;
+        this.operation = operation;
+    }
 
     public SearchCriteria(String key, Object value, Object value2, SearchOperation operation){
         this.key = key; 

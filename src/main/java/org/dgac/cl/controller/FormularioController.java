@@ -129,12 +129,20 @@ public class FormularioController {
         @RequestParam(required = false) String origen,
         @RequestParam(required = false) String destino,
         @RequestParam(required = false) Boolean requiereEscolta,
+        @RequestParam(required = false) Boolean trasladoNull,
         @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate fechaVuelo
     ) {
         System.out.println("Valor de estadoTraslado en el filtro: " + estadoTraslado);
         return ResponseEntity.ok(
-            service.filtrarFormularios(companiaAerea, numeroVuelo, estadoTraslado,origen, destino,requiereEscolta, fechaVuelo)
-        );
+            negocio.findByFiltro(FormularioFilter.builder()
+            .companiaAerea(companiaAerea)
+            .vuelo(numeroVuelo)
+            .estadoTraslado(estadoTraslado)
+            .origen(origen)
+            .destino(destino)
+            .requiereEscolta(requiereEscolta)
+            .trasladoNull(trasladoNull)
+            .fechaVuelo(fechaVuelo).build()));
     }
     
 
