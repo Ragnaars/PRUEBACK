@@ -1,6 +1,7 @@
 package org.dgac.cl.negocio;
 
-import java.util.ArrayList;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,7 +9,6 @@ import java.util.Set;
 import org.dgac.cl.constantes.ConstantesEstadoFormulario;
 import org.dgac.cl.filter.FormularioFilter;
 import org.dgac.cl.model.dto.FormularioPendienteFiltro;
-import org.dgac.cl.model.entity.CompaniaVuelo;
 import org.dgac.cl.model.entity.EstadoFormulario;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.service.CompaniaVueloService;
@@ -124,4 +124,20 @@ public class FormularioNegocio {
     public List<Formulario> findByFiltro(FormularioFilter filter) {
         return service.findAll(filter.generarFiltro());
     }
+
+
+    
+
+    public Set<FormularioPendienteView> filtrarTraslados(
+        Integer companiaAerea,
+        Integer numeroVuelo,
+        Integer puenteEmbarque,
+        Integer estadoTraslado,
+        LocalDate fechaVuelo,
+        String origen,
+        String destino
+        ) {
+        return service.filtrarTraslados(companiaAerea, numeroVuelo, puenteEmbarque, estadoTraslado, fechaVuelo, origen, destino);
+    }
+    
 }

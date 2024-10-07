@@ -1,5 +1,6 @@
 package org.dgac.cl.model.dao;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -78,7 +79,6 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
         @Param("traslado") Integer traslado);
 
     // formularios asignados a traslado
-
     @Query("SELECT new org.dgac.cl.model.view.FormularioPendienteView(" 
     + "f.fechaHoraVuelo, "
     + "f.companiaVuelo, "
@@ -98,6 +98,8 @@ public interface FormularioDAO extends JpaRepository<Formulario, Long>, JpaSpeci
         @Param("numeroVuelo") Integer numeroVuelo,
         @Param("puenteEmbarque") Integer puenteEmbarque);
 
+
+        
 @Query("SELECT f FROM Formulario f WHERE " +
        "(:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea) AND " +
        "(:numeroVuelo IS NULL OR f.companiaVuelo.numeroVuelo = :numeroVuelo) AND " +
@@ -113,8 +115,36 @@ public Set<Formulario> filtrarFormularios(
         @Param("origen") String origen,
         @Param("destino") String destino,
         @Param("requiereEscolta") Boolean requiereEscolta,
-        @Param("fechaVuelo") LocalDate fechaVuelo    
+        @Param("fechaVuelo") LocalDate fechaVuelo  
 );
+
+
+@Query("SELECT new org.dgac.cl.model.view.FormularioPendienteView(" 
++ "f.fechaHoraVuelo, "
++ "f.companiaVuelo, "
++ "f.requiereEscolta, "
++ "COUNT(f) OVER (PARTITION BY f.companiaVuelo, f.fechaHoraVuelo, f.traslado, f.puenteEmbarque, f.origen, f.destino), "
++ "new org.dgac.cl.model.view.PuenteEmbarqueView(f.puenteEmbarque.id, f.puenteEmbarque.nombre), "
++ "f.origen, "
++ "f.destino, "
++ "new org.dgac.cl.model.view.TrasladoPendienteView(f.traslado.id, f.traslado.estadoTraslado)) FROM Formulario f "
++ "WHERE " 
++"(:companiaAerea IS NULL OR f.companiaVuelo.companiaAerea = :companiaAerea) AND " +
+       "(:numeroVuelo IS NULL OR f.companiaVuelo.numeroVuelo = :numeroVuelo) AND " +
+       "(f.traslado IS NULL OR :estadoTraslado IS NULL OR f.traslado.estadoTraslado.id = :estadoTraslado) AND " +
+       "(:puenteEmbarque IS NULL OR f.puenteEmbarque.id = :puenteEmbarque) AND " +
+       "(:fechaVuelo IS NULL OR CAST(f.fechaHoraVuelo AS DATE) = :fechaVuelo) AND" +
+        "(:origen IS NULL OR f.origen = :origen) AND " +
+        "(:destino IS NULL OR f.destino = :destino)" 
+       )
+public Set<FormularioPendienteView> filtrarTraslados(
+    @Param("companiaAerea") Integer companiaAerea,
+    @Param("numeroVuelo") Integer numeroVuelo,
+    @Param("puenteEmbarque") Integer puenteEmbarque,    
+    @Param("estadoTraslado") Integer estadoTraslado,
+    @Param("fechaVuelo") LocalDate fechaVuelo,
+    @Param("origen") String origen,
+    @Param("destino") String destino);
 
 
 

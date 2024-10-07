@@ -1,5 +1,6 @@
 package org.dgac.cl.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -146,6 +147,20 @@ public class FormularioController {
     }
     
 
-  
+    @GetMapping("/filtros/traslados")
+    public ResponseEntity<?> filtrarTraslados(
+        @RequestParam(required = false) Integer companiaAerea,
+        @RequestParam(required = false) Integer numeroVuelo,
+        @RequestParam(required = false) Integer puenteEmbarque,
+        @RequestParam(required = false) Integer estadoTraslado,
+        @RequestParam(required = false) @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate fechaVuelo,
+        @RequestParam(required = false) String origen,
+        @RequestParam(required = false) String destino
+    ) {
+        System.out.println("Fecha recibida: " + fechaVuelo);  // Agrega este log
+        return ResponseEntity.ok(
+            negocio.filtrarTraslados(companiaAerea, numeroVuelo, puenteEmbarque, estadoTraslado, fechaVuelo, origen, destino));
+    }
+    
 
 }

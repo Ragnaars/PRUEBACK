@@ -1,5 +1,6 @@
 package org.dgac.cl.model.service;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -31,5 +32,14 @@ public interface FormularioService {
         Boolean requiereEscolta, 
         LocalDate fechaVuelo);
     public List<Formulario> findAll(Specification<Formulario> specification);
+    public Set<FormularioPendienteView> filtrarTraslados (
+        Integer companiaAerea,
+        Integer numeroVuelo,
+        Integer puenteEmbarque,    
+        Integer estadoTraslado,
+        LocalDate fechaVuelo,
+        String origen,
+        String destino
+    );
         
 }

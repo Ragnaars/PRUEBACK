@@ -3,21 +3,26 @@ package org.dgac.cl.filter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import org.dgac.cl.enums.SearchOperation;
 import org.dgac.cl.model.entity.Formulario;
 import org.dgac.cl.model.entity.Usuario;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Data //sirve para generar los getter y setter
+@AllArgsConstructor //sirve para generar un constructor con todos los argumentos
+@NoArgsConstructor //sirve para generar un constructor vacio
+@Builder //sirve para generar un objeto con todos los atributos
 public class FormularioFilter implements Serializable, Filtro {
 
     private static final long serialVersionUID = 1L;
+
+
+    //Parametros de busqueda
 
     private LocalDateTime fechaHoraRegistro;
     private Integer asientoPax;

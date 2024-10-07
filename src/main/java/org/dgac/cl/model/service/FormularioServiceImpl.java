@@ -1,5 +1,6 @@
 package org.dgac.cl.model.service;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -85,6 +86,11 @@ public class FormularioServiceImpl implements FormularioService {
     public List<Formulario> findAll(Specification<Formulario> specification) {
 
         return dao.findAll(specification);
+    }
+
+    @Override
+    public Set<FormularioPendienteView> filtrarTraslados(Integer companiaAerea, Integer numeroVuelo, Integer puenteEmbarque, Integer estadoTraslado, LocalDate fechaVuelo, String origen, String destino) {
+        return dao.filtrarTraslados(companiaAerea, numeroVuelo, puenteEmbarque, estadoTraslado, fechaVuelo, origen, destino);
     }
 
 }
